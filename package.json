@@ -1,0 +1,25 @@
+{
+  "name": "e-commerce-site",
+  "version": "1.0.0",
+  "description": "wear online shop",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "node server/app",
+    "server": "nodemon server/app",
+    "client": "npm run start --prefix client",
+    "client-build": "npm run build --prefix client",
+    "client-install": "npm run install --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Mikhail Volkov <volkov.work1@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.5"
+  }
+}

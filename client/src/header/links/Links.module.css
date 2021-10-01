@@ -1,0 +1,26 @@
+.links {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.linkItem {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 1rem 0 1rem;
+    cursor: pointer;
+}
+
+.activeLinkItem {
+    background-color: #f7fafc;
+    border-bottom: 2px solid;
+    border-bottom-color: #1a9eff;
+}
+
+@media screen and (max-width: 600px) {
+    .links{
+        display: none;
+    }
+}

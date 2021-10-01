@@ -1,0 +1,43 @@
+.links {
+    background-color: #fff;
+    display: none;
+    align-items: center;
+    transition: all ease 0.5s;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: 50vh;
+    top: -50vh;
+}
+
+.linkItem {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+    width: 100%;
+    padding: 0;
+    justify-content: center;
+}
+
+.activeLinkItem {
+    background-color: #f7fafc;
+    border-bottom: 2px solid;
+    border-bottom-color: #1a9eff;
+    width: 100%;
+}
+
+.down {
+    transform: translateY(50vh);
+}
+
+.up {
+    transform: translateY(-50vh);
+}
+
+@media screen and (max-width: 600px) {
+    .links {
+        display: flex;
+    }
+}
