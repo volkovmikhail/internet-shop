@@ -16,7 +16,7 @@
 .activeLinkItem {
     background-color: #f7fafc;
     border-bottom: 2px solid;
-    border-bottom-color: #1a9eff;
+    border-bottom-color: #000;
 }
 
 @media screen and (max-width: 600px) {

@@ -8,6 +8,7 @@
     width: 100%;
     height: 50vh;
     top: -50vh;
+    z-index: 500;
 }
 
 .linkItem {
@@ -19,21 +20,23 @@
     width: 100%;
     padding: 0;
     justify-content: center;
+    z-index: 501;
 }
 
 .activeLinkItem {
     background-color: #f7fafc;
     border-bottom: 2px solid;
-    border-bottom-color: #1a9eff;
+    border-bottom-color: #000;
     width: 100%;
+    z-index: 501;
 }
 
 .down {
-    transform: translateY(50vh);
+    transform: translateY(calc(50vh + 80px));
 }
 
 .up {
-    transform: translateY(-50vh);
+    transform: translateY(calc(-50vh - 80px));
 }
 
 @media screen and (max-width: 600px) {

@@ -7,8 +7,6 @@
     "start": "node server/app",
     "server": "nodemon server/app",
     "client": "npm run start --prefix client",
-    "client-build": "npm run build --prefix client",
-    "client-install": "npm run install --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Mikhail Volkov <volkov.work1@gmail.com>",

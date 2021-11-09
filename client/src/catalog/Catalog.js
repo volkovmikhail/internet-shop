@@ -6,10 +6,11 @@ function Catalog({ wears }) {
     return (
         <div className={styles.container}>
             <div className={styles.cardContainer}>
-                {wears.map(wear => {
+                {wears.map((wear, index) => {
                     return (
                         <Card
-                            key={wear._id}
+                            key={index}
+                            id={wear._id}
                             url={wear.image}
                             title={wear.title}
                             price={wear.price}

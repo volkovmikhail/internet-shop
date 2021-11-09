@@ -1,0 +1,49 @@
+.cardImg {
+    width: 100%;
+    padding-bottom: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card {
+    width: 100%;
+    display: flex;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    justify-content: space-between;
+}
+
+.cartText{
+  display: flex;
+}
+
+.cardImg {
+    width: 10vw;
+    padding-bottom: 10vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.mainInfo {
+    display: flex;
+}
+
+.card {
+    width: 100%;
+}
+
+.cardInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardInfo > div {
+    margin: 0.5rem;
+}
+
+.price {
+    color: #718096;
+}
