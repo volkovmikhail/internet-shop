@@ -46,7 +46,7 @@ function CartItem({ url, title, price, currency, id, count }) {
                     </div>
                 </div>
                 <button
-                    className={styles.orderButton}
+                    className={styles.deleteButton}
                     onClick={() => {
                         deleteCartItem(id);
                     }}
