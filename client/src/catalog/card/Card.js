@@ -30,9 +30,15 @@ function Card({ url, title, price, currency, id }) {
         }
     }
 
+    const toItemPage = (itemId) => {
+        console.log(itemId);
+        window.location.pathname = `/item/${itemId}`;
+    };
+
     return (
         <div className={styles.card}>
             <div
+                onClick={() => toItemPage(id)}
                 className={styles.cardImg}
                 style={{
                     backgroundImage: `url('./images/${url}')`,
@@ -40,7 +46,7 @@ function Card({ url, title, price, currency, id }) {
             ></div>
             <div className={styles.cardTitle}>
                 <div className={styles.cardInfo}>
-                    <div>
+                    <div style={{ cursor: 'pointer' }} onClick={() => toItemPage(id)}>
                         <p>{title}</p>
                         <p className={styles.price}>
                             {price} {currency}

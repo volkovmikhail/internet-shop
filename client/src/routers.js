@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Shop from './pages/Shop';
 import About from './pages/About';
 import Cart from './pages/Cart';
+import ItemPage from './pages/ItemPage';
 
 function useRoutes() {
     return (
@@ -16,6 +17,9 @@ function useRoutes() {
             <Route path="/cart" exact>
                 <Cart/>
             </Route >
+            <Route path="/item/:id">
+                 <ItemPage/>
+            </Route>
             <Redirect to="/catalog" />
         </Switch>
     );

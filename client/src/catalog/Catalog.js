@@ -11,7 +11,7 @@ function Catalog({ wears }) {
                         <Card
                             key={index}
                             id={wear._id}
-                            url={wear.image}
+                            url={wear.images[0]}
                             title={wear.title}
                             price={wear.price}
                             currency={wear.currency}

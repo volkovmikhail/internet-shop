@@ -51,7 +51,7 @@ function CartItem({ url, title, price, currency, id, count }) {
                         deleteCartItem(id);
                     }}
                 >
-                    X
+                    &#10006;
                 </button>
             </div>
             <hr />

@@ -1,4 +1,4 @@
-import { FETCH_WEARS, ADD_TO_CART } from './actions';
+import { FETCH_WEARS} from './actions';
 
 export default function reducer(state, action) {
     switch (action.type) {

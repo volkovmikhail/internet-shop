@@ -26,7 +26,10 @@ function Menu({ active }) {
                 onClick={() => link('/cart')}
                 className={active === 'cart' ? styles.linkItem + ' ' + styles.activeLinkItem : styles.linkItem}
             >
-                <h4>Cart</h4>
+                <div href="/" className={styles.cartLink}>
+                    <div className={styles.cartImage} style={{ backgroundImage: `url("/images/assets/cart.svg")` }} />
+                    <span className={styles.badge}>3</span>
+                </div>
             </div>
         </div>
     );
