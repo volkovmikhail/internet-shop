@@ -6,12 +6,12 @@ function ItemContent({ wear }) {
         <main>
             <div className={styles.container}>
                 <div className={styles.imagesContainer}>
-                    {wear.images !== undefined ? (
+                    {wear?.images !== undefined ? (
                         wear.images.map((i, index) => (
                             <div key={index} style={{ backgroundImage: `url('../images/${i}')` }}></div>
                         ))
                     ) : (
-                        <div className="loader" />
+                        <h1>Loading...</h1>
                     )}
                 </div>
                 <div className={styles.infoContainer}>

@@ -31,7 +31,7 @@
     width: 2rem;
     height: 2rem;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: flex-end;
 }
 
@@ -40,11 +40,6 @@
     padding: 0.5rem;
     position: relative;
     display: inline-block;
-}
-
-
-.cartLink:hover {
-    background: red;
 }
 
 .cartLink .badge {

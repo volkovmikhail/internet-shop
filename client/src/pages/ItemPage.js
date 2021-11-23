@@ -19,13 +19,13 @@ function ItemPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     async function setItemData() {
         const data = await (await fetch(`/api/wear/${getItemIdFromUrl()}`)).json();
-        setState(data[0]);
+        setState(data);
     }
 
     return (
         <div>
             <Header active="" />
-            {state?.message !== 'item not found' ? <ItemContent wear={state} /> : <h1 className="loadingContainer">Item not found</h1>}
+            {state?.data ? <ItemContent wear={state.data[0]} /> : <h1 className="loadingContainer">Item not found</h1>}
             <Footer />
         </div>
     );
