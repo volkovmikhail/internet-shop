@@ -9,7 +9,7 @@ function CartContent({ cart }) {
                     <CartItem
                         id={wear._id}
                         key={index}
-                        url={wear.image}
+                        url={wear.images[0]}
                         title={wear.title}
                         price={wear.price}
                         currency={wear.currency}
