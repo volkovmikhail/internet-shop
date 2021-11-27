@@ -4,14 +4,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = require('./routes/apiRoutes');
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
 
 const app = express();
 
 app.use('/api/', router);
-app.use('/', express.static(path.join(__dirname, '..', 'client', 'build')));
+app.use('/', express.static(path.join(__dirname, '..', 'build')));
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'));
+    res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
 
 async function start() {
