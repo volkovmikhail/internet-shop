@@ -1,26 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styles from './cartitem.module.css';
-import { Context } from '../../cartContext';
+import {useDispatch} from 'react-redux';
+import {deleteFromCart} from '../../actions';
 
 function CartItem({ url, title, price, currency, id, count }) {
-    const { setCart } = useContext(Context);
-
+    const dispatch = useDispatch();
     function deleteCartItem(itemId) {
-        let cart = JSON.parse(localStorage.getItem('cart'));
-        let newCart = [];
-        cart.forEach((i) => {
-            if (i._id === itemId) {
-                if (i.count === 1) {
-                    return;
-                }
-                i.count--;
-                newCart.push(i);
-            } else {
-                newCart.push(i);
-            }
-        });
-        localStorage.setItem('cart', JSON.stringify(newCart));
-        setCart(JSON.parse(localStorage.getItem('cart')));
+        dispatch(deleteFromCart(itemId));
     }
 
     return (

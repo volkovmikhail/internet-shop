@@ -16,8 +16,8 @@
     flex-direction: column;
 }
 
-.cardInfo > div {
-    margin: 0.5rem;
+.cardInfo div {
+    margin: 0.7rem;
 }
 
 .orderButton {

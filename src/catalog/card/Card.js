@@ -1,69 +1,51 @@
-import React, { useContext } from 'react';
 import styles from './card.module.css';
-import { Context } from '../../context';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../actions';
+import { Link } from 'react-router-dom';
 
 function Card({ url, title, price, currency, id }) {
-    const { store } = useContext(Context);
+  const dispath = useDispatch();
 
-    function addToCart(itemId) {
-        let newItem = store.catalog.filter((i) => i._id === itemId);
-        let cart = JSON.parse(localStorage.getItem('cart'));
-        let isFind = false;
-        if (cart) {
-            const newCart = cart.map((i) => {
-                let newI = i;
-                if (i._id === newItem[0]._id) {
-                    newI.count = newI.count + 1;
-                    isFind = true;
-                }
-                return newI;
-            });
-            if (isFind) {
-                localStorage.setItem('cart', JSON.stringify([...newCart]));
-            } else {
-                newItem[0].count = 1;
-                localStorage.setItem('cart', JSON.stringify([newItem[0], ...newCart]));
-            }
-        } else {
-            newItem[0].count = 1;
-            localStorage.setItem('cart', JSON.stringify([newItem[0]]));
-        }
-    }
+  function addItemToCart(itemId) {
+    dispath(addToCart(itemId));
+  }
 
-    const toItemPage = (itemId) => {
-        console.log(itemId);
-        window.location.pathname = `/item/${itemId}`;
-    };
+  const toItemPage = (itemId) => {
+    return `/item/${itemId}`;
+  };
 
-    return (
-        <div className={styles.card}>
-            <div
-                onClick={() => toItemPage(id)}
-                className={styles.cardImg}
-                style={{
-                    backgroundImage: `url('./images/${url}')`,
-                }}
-            ></div>
-            <div className={styles.cardTitle}>
-                <div className={styles.cardInfo}>
-                    <div style={{ cursor: 'pointer' }} onClick={() => toItemPage(id)}>
-                        <p>{title}</p>
-                        <p className={styles.price}>
-                            {price} {currency}
-                        </p>
-                    </div>
-                    <button
-                        className={styles.orderButton}
-                        onClick={() => {
-                            addToCart(id);
-                        }}
-                    >
-                        ORDER
-                    </button>
-                </div>
+  return (
+    <div className={styles.card}>
+      <Link to={toItemPage(id)}>
+        <div
+          className={styles.cardImg}
+          style={{
+            backgroundImage: `url('./images/${url}')`,
+          }}
+        ></div>
+      </Link>
+      <div className={styles.cardTitle}>
+        <div className={styles.cardInfo}>
+          <Link to={toItemPage(id)}>
+            <div style={{ cursor: 'pointer' }}>
+              <p>{title}</p>
+              <p className={styles.price}>
+                {price} {currency}
+              </p>
             </div>
+          </Link>
+          <button
+            className={styles.orderButton}
+            onClick={() => {
+              addItemToCart(id);
+            }}
+          >
+            ORDER
+          </button>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default Card;

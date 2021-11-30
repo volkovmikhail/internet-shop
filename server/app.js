@@ -4,7 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = require('./routes/apiRoutes');
 
-const port = process.env.PORT || 3002;
+const port = process.env.SERVER_PORT || 3002;
 
 const app = express();
 
