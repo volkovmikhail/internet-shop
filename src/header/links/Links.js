@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Links.module.css';
 import { useSelector } from 'react-redux';
+import { AuthContext } from '../../AuthContext';
 
 function Menu({ active }) {
   const store = useSelector((state) => state);
+  const { token } = useContext(AuthContext);
 
   const getCartItemsCount = (cart) => {
     let sum = 0;
@@ -14,12 +16,12 @@ function Menu({ active }) {
 
   return (
     <div className={`${styles.links} ${styles.visibleBigScreen}`}>
-      <Link
+      {/* <Link
         to="/about"
         className={active === 'about' ? styles.linkItem + ' ' + styles.activeLinkItem : styles.linkItem}
       >
         <h4>About us</h4>
-      </Link>
+      </Link> */}
       <Link
         to="/catalog"
         className={active === 'catalog' ? styles.linkItem + ' ' + styles.activeLinkItem : styles.linkItem}
@@ -37,6 +39,21 @@ function Menu({ active }) {
           )}
         </div>
       </Link>
+      {token ? (
+        <Link
+          to="/profile"
+          className={active === 'profile' ? styles.linkItem + ' ' + styles.activeLinkItem : styles.linkItem}
+        >
+          <h4>Profile</h4>
+        </Link>
+      ) : (
+        <Link
+          to="/login"
+          className={active === 'login' ? styles.linkItem + ' ' + styles.activeLinkItem : styles.linkItem}
+        >
+          <h4>Log in</h4>
+        </Link>
+      )}
     </div>
   );
 }

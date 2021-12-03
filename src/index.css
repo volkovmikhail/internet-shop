@@ -1,13 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap');
 
-*{
-  margin: 0;
+*,
+*:before,
+*:after {
   padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 a:active,
 a:hover,
-a:visited,  
+a:visited,
 a {
   text-decoration: none;
   color: #000;
@@ -21,28 +24,27 @@ body {
   min-height: 100vh;
 }
 
-hr{
+hr {
   border-top: 1px solid rgb(203, 213, 224);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-p{
+p {
   font-size: 18px;
   margin: 3px;
 }
 
-.title{
+.title {
   width: 100%;
   max-width: 90%;
-  margin:50px auto 25px;
+  margin: 50px auto 25px;
   text-transform: uppercase;
 }
 
-.loadingContainer{
+.loadingContainer {
   width: 100%;
   height: 60vh;
   display: flex;
@@ -57,15 +59,74 @@ p{
 }
 
 .loader {
-  border: 8px solid #fff; /* Light grey */
-  border-top: 8px solid #000; /* Blue */
+  border: 8px solid #fff;
+  border-top: 8px solid #000;
   border-radius: 50%;
   width: 50px;
   height: 50px;
   animation: spin 2s linear infinite;
+  z-index: 1000;
+}
+
+.logoutBtn {
+  -webkit-transition: all 0.7s ease-out;
+  transition: all 0.7s ease-out;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7s;
+  cursor: pointer;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: none;
+  color: inherit;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle;
+  outline: none;
+  width: auto;
+  line-height: 1.2;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  min-width: 6rem;
+  height: 2.5rem;
+  font-size: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background: #000;
+  color: #ffffff;
+  border: 1px solid;
+  border-color: #000;
+  align-self: flex-end;
+}
+
+.logoutBtn:hover {
+  color: #000;
+  background-color: #ffffff;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

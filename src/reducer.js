@@ -1,8 +1,9 @@
-import { ADD_TO_CART, DELETE_FROM_CART, FETCH_WEARS } from './actionTypes';
+import { ADD_TO_CART, DELETE_FROM_CART, FETCH_USERDATA, FETCH_WEARS } from './actionTypes';
 
 const initState = {
   catalog: [],
   cart: [],
+  user: {},
 };
 
 export default function reducer(store = initState, action) {
@@ -61,6 +62,11 @@ export default function reducer(store = initState, action) {
       return {
         ...store,
         cart: newCart,
+      };
+    case FETCH_USERDATA:
+      return {
+        ...store,
+        user: action.payload,
       };
     default:
       return store;

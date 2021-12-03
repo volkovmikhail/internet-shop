@@ -17,7 +17,7 @@ function Header({ active }) {
             <div className={styles.header}>
                 <div className={styles.nav}>
                     <div className={styles.logo}>
-                        <h1>LOGO</h1>
+                        <h1>Clothes</h1>
                     </div>
                     <Links active={active} />
                     <div className={styles.burgerMenu}>

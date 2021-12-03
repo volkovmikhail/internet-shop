@@ -1,4 +1,4 @@
-import { FETCH_WEARS, ADD_TO_CART, DELETE_FROM_CART } from './actionTypes';
+import { FETCH_WEARS, ADD_TO_CART, DELETE_FROM_CART, FETCH_USERDATA } from './actionTypes';
 
 export function fetchWears() {
   return async (dispatch) => {
@@ -24,6 +24,22 @@ export function deleteFromCart(id) {
     dispatch({
       type: DELETE_FROM_CART,
       payload: id,
+    });
+  };
+}
+
+export function fetchUserData(token) {
+  return async (dispatch) => {
+    const data = await (
+      await fetch('/api/profile', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+    ).json();
+    dispatch({
+      type: FETCH_USERDATA,
+      payload: data,
     });
   };
 }
