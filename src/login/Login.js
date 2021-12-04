@@ -3,6 +3,7 @@ import styles from './login.module.css';
 import { Link, useHistory } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 
+// eslint-disable-next-line no-useless-escape
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 function Login() {

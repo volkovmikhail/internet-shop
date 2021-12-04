@@ -15,6 +15,7 @@ function Profile() {
     if (token) {
       dispatch(fetchUserData(token));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function logoutHandler() {

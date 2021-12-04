@@ -7,11 +7,11 @@ import ItemPage from './pages/ItemPage';
 import Dashboard from './pages/Dashboard';
 import LoginPage from './pages/LoginPage';
 import Profile from './pages/Profile';
+import RegistrationPage from './pages/RegistrationPage';
 
 function useRoutes(role) {
   switch (role) {
     case 'USER':
-      console.log('user');
       return (
         <Switch>
           <Route path="/about" exact>
@@ -31,6 +31,9 @@ function useRoutes(role) {
           </Route>
           <Route path="/profile" exact>
             <Profile />
+          </Route>
+          <Route path="/registration" exact>
+            <RegistrationPage />
           </Route>
           <Redirect to="/catalog" />
         </Switch>
@@ -56,6 +59,9 @@ function useRoutes(role) {
           <Route path="/login" exact>
             <LoginPage />
           </Route>
+          <Route path="/registration" exact>
+            <RegistrationPage />
+          </Route>
           <Redirect to="/catalog" />
         </Switch>
       );
@@ -76,6 +82,9 @@ function useRoutes(role) {
           </Route>
           <Route path="/login" exact>
             <LoginPage />
+          </Route>
+          <Route path="/registration" exact>
+            <RegistrationPage />
           </Route>
           <Redirect to="/catalog" />
         </Switch>

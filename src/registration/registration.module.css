@@ -39,7 +39,7 @@
 }
 
 .form {
-  height: 520px;
+  height: 840px;
   width: 400px;
   background-color: rgba(255, 255, 255, 0.13);
   border-radius: 10px;
@@ -135,7 +135,7 @@
   background-color: #ffffff;
 }
 
-.button:disabled {
+.button:disabled{
   background-color: rgb(161, 161, 161);
   color: rgb(117, 117, 117);
   border: rgb(117, 117, 117) solid 1px;
@@ -144,7 +144,7 @@
 .loading {
   color: inherit;
   font-weight: bold;
-  display: inline-block;
+  display:inline-block;
   font-size: inherit;
   clip-path: inset(0 1.2ch 0 0);
   animation: l 1s steps(4) infinite;
@@ -152,6 +152,6 @@
 
 @keyframes l {
   to {
-    clip-path: inset(0 -0.4ch 0 0);
+    clip-path: inset(0 -0.4ch 0 0)
   }
 }
