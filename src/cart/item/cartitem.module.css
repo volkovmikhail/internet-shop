@@ -99,3 +99,9 @@
     color: #FFF;
     background-color: salmon;
 }
+
+@media screen and (max-width: 500px) {
+    .cartText p{
+        font-size: 12px;
+    }
+}
