@@ -56,13 +56,16 @@ function useRoutes(role) {
           <Route path="/dashboard">
             <Dashboard />
           </Route>
+          <Route path="/profile" exact>
+            <Profile />
+          </Route>
           <Route path="/login" exact>
             <LoginPage />
           </Route>
           <Route path="/registration" exact>
             <RegistrationPage />
           </Route>
-          <Redirect to="/catalog" />
+          <Redirect to="/dashboard" />
         </Switch>
       );
     default:
@@ -79,6 +82,9 @@ function useRoutes(role) {
           </Route>
           <Route path="/item/:id">
             <ItemPage />
+          </Route>
+          <Route path="/profile" exact>
+            <Profile />
           </Route>
           <Route path="/login" exact>
             <LoginPage />

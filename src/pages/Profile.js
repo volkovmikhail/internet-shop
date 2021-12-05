@@ -4,10 +4,10 @@ import Footer from '../footer/Footer';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserData } from '../actions';
 import { AuthContext } from '../AuthContext';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function Profile() {
-  const { token, logout } = useContext(AuthContext);
+  const { token, logout, role } = useContext(AuthContext);
   const { user } = useSelector((store) => store);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -15,7 +15,7 @@ function Profile() {
     if (token) {
       dispatch(fetchUserData(token));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function logoutHandler() {
@@ -37,6 +37,15 @@ function Profile() {
         <button className="logoutBtn" style={{ marginTop: '50px' }} onClick={logoutHandler}>
           Log out
         </button>
+        {role === 'ADMIN' ? (
+          <Link to="/dashboard">
+            <button className="logoutBtn" style={{ marginTop: '50px', marginLeft:'30px' }}>
+              admin dashboard
+            </button>
+          </Link>
+        ) : (
+          ''
+        )}
       </div>
       <Footer />
     </div>

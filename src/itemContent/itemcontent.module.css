@@ -1,24 +1,24 @@
 main {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .container {
-    margin: 5rem;
-    max-width: 1300px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  margin: 5rem;
+  max-width: 1300px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .imagesContainer {
-    width: 60%;
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+  width: 60%;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-.imagesContainer>div{
+.imagesContainer > div {
   padding-bottom: 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -26,21 +26,89 @@ main {
 }
 
 .infoContainer {
-    width: 30%;
-    padding: 1rem;
+  width: 30%;
+  padding: 1rem;
+  word-wrap: break-word;
 }
 
 @media screen and (max-width: 700px) {
-  .imagesContainer{
+  .imagesContainer {
     width: 100%;
   }
 
-  .infoContainer{
+  .infoContainer {
     width: 85%;
   }
 
-  .container{
+  .container {
     width: 100%;
     flex-direction: column;
   }
+}
+
+.orderButton {
+  -webkit-transition: all 0.7s ease-out;
+  transition: all 0.7s ease-out;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7s;
+  cursor: pointer;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: none;
+  color: inherit;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle;
+  outline: none;
+  width: auto;
+  line-height: 1.2;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  min-width: 6rem;
+  height: 2.5rem;
+  font-size: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background: #000;
+  color: #ffffff;
+  border: 1px solid;
+  border-color: #000;
+  align-self: flex-end;
+}
+
+.orderButton:hover {
+  color: #000;
+  background-color: #ffffff;
+}
+
+.price {
+  color: #718096;
+  margin-bottom: 1rem;
+}
+
+.discription{
+  margin: 2rem 0 2rem 0;
+}
+
+.category{
+  margin-bottom: 1rem;
 }

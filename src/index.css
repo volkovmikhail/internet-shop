@@ -122,11 +122,31 @@ p {
   background-color: #ffffff;
 }
 
+.logoutBtn:disabled {
+  background-color: rgb(161, 161, 161);
+  color: rgb(117, 117, 117);
+  border: rgb(117, 117, 117) solid 1px;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.loading {
+  font-weight: bold;
+  display: inline-block;
+  font-size: 30px;
+  clip-path: inset(0 1.2ch 0 0);
+  animation: l 1s steps(4) infinite;
+}
+
+@keyframes l {
+  to {
+    clip-path: inset(0 -0.4ch 0 0);
   }
 }

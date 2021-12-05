@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import styles from './registration.module.css';
 import { Link, useHistory } from 'react-router-dom';
 
@@ -61,7 +61,7 @@ function Registration() {
   }
 
   function validate(n, ln, em, pw, conf) {
-    if (n.length < 3 || !em.match(regexEmail) || ln.length < 3 || pw.length < 8 || conf != pw) {
+    if (n.length < 3 || !em.match(regexEmail) || ln.length < 3 || pw.length < 8 || conf !== pw) {
       setDisabled(true);
     } else {
       setDisabled(false);

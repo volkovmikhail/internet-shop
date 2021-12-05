@@ -1,4 +1,4 @@
-import { FETCH_WEARS, ADD_TO_CART, DELETE_FROM_CART, FETCH_USERDATA } from './actionTypes';
+import { FETCH_WEARS, ADD_TO_CART, DELETE_FROM_CART, FETCH_USERDATA, CLEAR_CART } from './actionTypes';
 
 export function fetchWears() {
   return async (dispatch) => {
@@ -40,6 +40,14 @@ export function fetchUserData(token) {
     dispatch({
       type: FETCH_USERDATA,
       payload: data,
+    });
+  };
+}
+
+export function clearCart() {
+  return (dispatch) => {
+    dispatch({
+      type: CLEAR_CART,
     });
   };
 }

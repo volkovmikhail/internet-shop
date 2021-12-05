@@ -40,7 +40,7 @@ function Card({ url, title, price, currency, id }) {
               addItemToCart(id);
             }}
           >
-            ORDER
+            ADD TO CART
           </button>
         </div>
       </div>
