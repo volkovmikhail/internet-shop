@@ -30,7 +30,7 @@ function Cart() {
       return;
     }
     setLoading(true);
-    await fetch('/api/checkout', {
+    const raw = await fetch('/api/checkout', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -39,7 +39,13 @@ function Cart() {
       },
       body: JSON.stringify(store.cart),
     });
-    alert('The order is placed, the manager will contact you via email');
+    if (raw.status === 200) {
+      alert('The order is placed, the manager will contact you via email');
+    } else {
+      alert('Somthing wrong, try again');
+      setLoading(false);
+      return;
+    }
     setLoading(false);
     dispatch(clearCart());
     history.push('/catalog');

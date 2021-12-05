@@ -39,3 +39,23 @@
         grid-template-columns: repeat(1, minmax(0, 1fr));
     }
 }
+
+.input {
+    border: 1px solid rgb(203, 213, 224);
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.filter{
+    max-width: 700px;
+    display: flex;
+    column-gap: 25px;
+    margin-bottom: 25px;
+}
