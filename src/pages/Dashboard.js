@@ -7,7 +7,7 @@ function Dashboard() {
     <div>
       <Header active="" />
       <h1 className="title">Dashboard</h1>
-      dashboard test
+        
       <Footer />
     </div>
   );

@@ -39,7 +39,7 @@ function Profile() {
         </button>
         {role === 'ADMIN' ? (
           <Link to="/dashboard">
-            <button className="logoutBtn" style={{ marginTop: '50px', marginLeft:'30px' }}>
+            <button className="logoutBtn" style={{ marginTop: '50px', marginLeft: '30px' }}>
               admin dashboard
             </button>
           </Link>

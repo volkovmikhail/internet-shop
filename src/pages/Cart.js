@@ -10,7 +10,7 @@ import { clearCart } from '../actions';
 function Cart() {
   const store = useSelector((state) => state);
   const dispatch = useDispatch();
-  const { token } = useContext(AuthContext);
+  const { token, logout } = useContext(AuthContext);
   const [isLodaing, setLoading] = useState(false);
   const history = useHistory();
   function total(cart) {
@@ -41,6 +41,9 @@ function Cart() {
     });
     if (raw.status === 200) {
       alert('The order is placed, the manager will contact you via email');
+    } else if (raw.status === 400) {
+      logout();
+      history.push('/login');
     } else {
       alert('Somthing wrong, try again');
       setLoading(false);
