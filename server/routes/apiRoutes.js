@@ -4,6 +4,10 @@ const getWearById = require('../controllers/getWearById');
 const getProfile = require('../controllers/getProfile');
 const postCheckout = require('../controllers/postCheckout');
 const postAddWear = require('../controllers/postAddWear');
+const getOrders = require('../controllers/getOrders');
+const deleteWear = require('../controllers/deleteWear');
+
+//middleтвари
 const authMiddleware = require('../middlewares/authMiddleware');
 const roleMiddleware = require('../middlewares/roleMiddleware');
 
@@ -18,5 +22,9 @@ router.get('/profile', authMiddleware, getProfile);
 router.post('/checkout', authMiddleware, postCheckout);
 
 router.post('/addwear', roleMiddleware(['ADMIN']), postAddWear);
+
+router.get('/orders', roleMiddleware(['ADMIN']), getOrders);
+
+router.delete('/wear/delete/:id', roleMiddleware(['ADMIN']), deleteWear);
 
 module.exports = router;

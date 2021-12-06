@@ -6,7 +6,7 @@ const router = require('./routes/apiRoutes');
 const authRouter = require('./routes/authRouter');
 const multer = require('multer');
 
-const port = process.env.SERVER_PORT || 3001;
+const port = process.env.SERVER_PORT || process.env.PORT || 3001;
 
 const app = express();
 app.use(express.json());

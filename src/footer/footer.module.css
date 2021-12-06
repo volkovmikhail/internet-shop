@@ -1,6 +1,14 @@
-.footer{
-    background-color: #F7FAFC;
-    padding: 3rem 0 3rem 0;
-    margin-top: 4rem;
-    height: 15vh;
+.footer {
+  background-color: #f7fafc;
+  padding: 3rem 0 3rem 0;
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contacts{
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
