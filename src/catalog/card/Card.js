@@ -20,7 +20,7 @@ function Card({ url, title, price, currency, id }) {
         <div
           className={styles.cardImg}
           style={{
-            backgroundImage: `url('./images/${url}')`,
+            backgroundImage: `url('${url}')`,
           }}
         ></div>
       </Link>
