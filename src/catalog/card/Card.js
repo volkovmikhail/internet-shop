@@ -1,13 +1,29 @@
 import styles from './card.module.css';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../../actions';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, deleteFromCart } from '../../actions';
 import { Link } from 'react-router-dom';
 
 function Card({ url, title, price, currency, id }) {
   const dispath = useDispatch();
+  const store = useSelector((store) => store);
+  const [countInCart, setStateCIC] = useState(0);
+
+  useEffect(() => {
+    const inCart = store.cart.filter((e) => e._id === id);
+    if (inCart.length) {
+      setStateCIC(inCart[0].count);
+    } else {
+      setStateCIC(0);
+    }
+  }, [id, store.cart]);
 
   function addItemToCart(itemId) {
     dispath(addToCart(itemId));
+  }
+
+  function deleteItemFromCart(itemId) {
+    dispath(deleteFromCart(itemId));
   }
 
   const toItemPage = (itemId) => {
@@ -34,14 +50,38 @@ function Card({ url, title, price, currency, id }) {
               </p>
             </div>
           </Link>
-          <button
-            className={styles.orderButton}
-            onClick={() => {
-              addItemToCart(id);
-            }}
-          >
-            ADD TO CART
-          </button>
+          {countInCart ? (
+            <div className={styles.buttonsContainer}>
+              <button
+                className={styles.countControllButtons}
+                onClick={() => {
+                  deleteItemFromCart(id);
+                }}
+              >
+                -
+              </button>
+              <span className={styles.countInCart}>{countInCart}</span>
+              <button
+                className={styles.countControllButtons}
+                onClick={() => {
+                  addItemToCart(id);
+                }}
+              >
+                +
+              </button>
+            </div>
+          ) : (
+            <div className={styles.buttonsContainer}>
+              <button
+                className={styles.orderButton}
+                onClick={() => {
+                  addItemToCart(id);
+                }}
+              >
+                ADD TO CART
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

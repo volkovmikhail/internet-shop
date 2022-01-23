@@ -61,7 +61,7 @@ function Cart() {
       {store.cart?.length ? <CartContent cart={store.cart} /> : <h1 className="loadingContainer">Cart is empty</h1>}
       {store.cart?.length ? (
         <div>
-          <h1 className="title">total: {total(store.cart)}</h1>
+          <h1 className="title">total: {total(store.cart)} BYN</h1>
           <div className="container" style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <button className="logoutBtn" style={{ width: '200px' }} onClick={checkout} disabled={isLodaing}>
               CHECKOUT

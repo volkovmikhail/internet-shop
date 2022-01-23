@@ -22,6 +22,21 @@ function Catalog({ wears }) {
 
   return (
     <div className={styles.container}>
+      <div className={styles.categories}>
+        <input type="text" className={styles.input} placeholder="Search" onInput={searchHandler} />
+        <div>
+          <div className={styles.category} onClick={() => categoryHandler({ target: { value: 'all' } })}>
+            <p>Show all</p>
+          </div>
+          {uniqueCategories.map((c, i) => {
+            return (
+              <div className={styles.category} key={i} onClick={() => categoryHandler({ target: { value: c } })}>
+                <p>{c}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
       <div className={styles.filter}>
         <input type="text" className={styles.input} placeholder="Search" onInput={searchHandler} />
         <select className={styles.input} onChange={categoryHandler}>

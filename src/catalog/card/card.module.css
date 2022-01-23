@@ -1,79 +1,161 @@
 .cardImg {
-    width: 100%;
-    padding-bottom: 90%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    cursor: pointer;
+  width: 100%;
+  padding-bottom: 90%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
 }
 
 .card {
-    width: 100%;
+  width: 100%;
+  -webkit-transition: all 0.7s ease-out;
+  transition: all 0.7s ease-out;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7s;
+  opacity: 0;
+  animation: ani 2.5s forwards;
+}
+
+@keyframes ani {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .cardInfo {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .cardInfo div {
-    margin: 0.7rem;
+  margin: 0.7rem;
 }
 
 .orderButton {
-    -webkit-transition: all 0.7s ease-out;
-    transition: all 0.7s ease-out;
-    -webkit-transition: all 0.7s;
-    transition: all 0.7s;
-    cursor: pointer;
-    -webkit-text-decoration: none;
-    text-decoration: none;
-    outline: none;
-    color: inherit;
-    display: -webkit-inline-box;
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    position: relative;
-    white-space: nowrap;
-    vertical-align: middle;
-    outline: none;
-    width: auto;
-    line-height: 1.2;
-    border-radius: 0.25rem;
-    font-weight: 600;
-    min-width: 6rem;
-    height: 2.5rem;
-    font-size: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    background: #000;
-    color: #ffffff;
-    border: 1px solid;
-    border-color: #000;
-    align-self: flex-end;
+  -webkit-transition: all 0.7s ease-out;
+  transition: all 0.7s ease-out;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7s;
+  cursor: pointer;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: none;
+  color: inherit;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle;
+  outline: none;
+  width: auto;
+  line-height: 1.2;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  min-width: 6rem;
+  height: 2.5rem;
+  font-size: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background: #000;
+  color: #ffffff;
+  border: 1px solid;
+  border-color: #000;
+  align-self: flex-end;
+  opacity: 0;
+  animation: ani 2.5s forwards;
+}
+
+.countControllButtons {
+  -webkit-transition: all 0.7s ease-out;
+  transition: all 0.7s ease-out;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7s;
+  cursor: pointer;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: none;
+  color: inherit;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle;
+  outline: none;
+  width: auto;
+  line-height: 1.2;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background: #000;
+  color: #ffffff;
+  border: 1px solid;
+  border-color: #000;
+  opacity: 0;
+  animation: ani 2.5s forwards;
+}
+
+.countControllButtons:hover {
+  color: #000;
+  background-color: #ffffff;
 }
 
 .orderButton:hover {
-    color: #000;
-    background-color: #ffffff;
+  color: #000;
+  background-color: #ffffff;
+}
+
+.buttonsContainer {
+  align-self: flex-end;
+}
+
+.countInCart {
+  margin: 1rem;
+  opacity: 0;
+  animation: ani 2.5s forwards;
 }
 
 .price {
-    color: #718096;
+  color: #718096;
 }

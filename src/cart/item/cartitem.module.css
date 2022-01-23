@@ -1,107 +1,136 @@
 .cardImg {
-    width: 100%;
-    padding-bottom: 90%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  width: 100%;
+  padding-bottom: 90%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.mainContainer {
+  animation: anim 1s forwards;
+}
+
+@keyframes anim {
+  0% {
+    transform: translateX(-150%);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .card {
-    width: 100%;
-    display: flex;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  justify-content: space-between;
+  width: 100%;
+  -webkit-transition: all 0.7s ease-out;
+  transition: all 0.7s ease-out;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7s;
+  opacity: 0;
+  animation: ani 2.5s forwards;
 }
 
-.cartText{
+@keyframes ani {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.cartText {
   display: flex;
 }
 
 .cardImg {
-    width: 10vw;
-    padding-bottom: 10vw;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  width: 10vw;
+  padding-bottom: 10vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .mainInfo {
-    display: flex;
+  display: flex;
 }
 
 .card {
-    width: 100%;
+  width: 100%;
 }
 
 .cardInfo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cardInfo > div {
-    margin: 0.5rem;
+  margin: 0.5rem;
 }
 
 .price {
-    color: #718096;
+  color: #718096;
 }
 
-.deleteButton{
-    width: 3%;
-    -webkit-transition: all 0.7s ease-out;
-    transition: all 0.7s ease-out;
-    -webkit-transition: all 0.7s;
-    transition: all 0.7s;
-    cursor: pointer;
-    -webkit-text-decoration: none;
-    text-decoration: none;
-    outline: none;
-    color: inherit;
-    display: -webkit-inline-box;
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    -webkit-align-items: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    position: relative;
-    white-space: nowrap;
-    vertical-align: middle;
-    outline: none;
-    line-height: 1.2;
-    border-radius: 0.25rem;
-    font-weight: 600;
-    font-size: 1rem;
-    background:#FFF;
-    color: #000;
-    border: 1px solid;
-    border-color: #fff;
-    align-self: center;
-    padding-bottom: 1%;
-    padding-top: 1%;
+.deleteButton {
+  width: 3%;
+  -webkit-transition: all 0.7s ease-out;
+  transition: all 0.7s ease-out;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7s;
+  cursor: pointer;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  outline: none;
+  color: inherit;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  white-space: nowrap;
+  vertical-align: middle;
+  outline: none;
+  line-height: 1.2;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  font-size: 1rem;
+  background: #fff;
+  color: #000;
+  border: 1px solid;
+  border-color: #fff;
+  align-self: center;
+  padding-bottom: 1%;
+  padding-top: 1%;
 }
 
 .deleteButton:hover {
-    color: #FFF;
-    background-color: salmon;
+  color: #fff;
+  background-color: salmon;
 }
 
 @media screen and (max-width: 500px) {
-    .cartText p{
-        font-size: 12px;
-    }
+  .cartText p {
+    font-size: 12px;
+  }
 }
