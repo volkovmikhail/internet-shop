@@ -33,6 +33,7 @@ function Wears() {
             <td>Price</td>
             <td>Currency</td>
             <td>Category</td>
+            <td>quantity</td>
             <td>discription</td>
             <td>Delete</td>
           </tr>
@@ -49,6 +50,7 @@ function Wears() {
                   <td>{w.price}</td>
                   <td>{w.currency}</td>
                   <td>{w.category}</td>
+                  <td>{w.quantity}</td>
                   <td>{w.discription}</td>
                   <td>
                     <button className="logoutBtn" onClick={() => deleteWear(w._id)}>

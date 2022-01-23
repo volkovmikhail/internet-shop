@@ -78,7 +78,7 @@ function Card({ url, title, price, currency, id }) {
                   addItemToCart(id);
                 }}
               >
-                ADD TO CART
+                В корзину
               </button>
             </div>
           )}

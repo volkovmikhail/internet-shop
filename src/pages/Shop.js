@@ -16,7 +16,7 @@ function Shop() {
   return (
     <div>
       <Header active="catalog" />
-      <h1 className="title">Catalog</h1>
+      <h1 className="title">Каталог</h1>
       {store.catalog?.length ? (
         <Catalog wears={store.catalog} />
       ) : (

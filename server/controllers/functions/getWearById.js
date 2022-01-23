@@ -1,4 +1,4 @@
-const Wear = require('../models/Wear');
+const Wear = require('../../models/Wear');
 const { isValidObjectId } = require('mongoose');
 const { Types } = require('mongoose');
 

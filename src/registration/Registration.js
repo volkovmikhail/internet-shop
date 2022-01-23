@@ -71,75 +71,75 @@ function Registration() {
   return (
     <div className={styles.main}>
       <form className={styles.form} onSubmit={submit}>
-        <h3>Registration</h3>
+        <h3>Регистрация</h3>
         <label htmlFor="name" className={styles.label}>
-          Name
+          Имя
         </label>
         <input
           type="text"
           name="name"
           className={styles.input}
-          placeholder="Your name"
+          placeholder="Ваше имя"
           id="name"
           value={name}
           onInput={nameHandler}
         />
 
         <label htmlFor="lastname" className={styles.label}>
-          Last name
+          Фамилия
         </label>
         <input
           type="text"
           name="lastname"
           className={styles.input}
-          placeholder="Your last name"
+          placeholder="Ваша фамилия"
           id="lastname"
           value={lastname}
           onInput={lastnnameHandler}
         />
 
         <label htmlFor="email" className={styles.label}>
-          Email
+          Эл. почта
         </label>
         <input
           type="text"
           name="email"
           className={styles.input}
-          placeholder="Email"
+          placeholder="Ваша эл. почта"
           id="email"
           value={email}
           onInput={emailHandler}
         />
 
         <label htmlFor="password" className={styles.label}>
-          Password
+          Пароль
         </label>
         <input
           type="password"
           name="password"
           className={styles.input}
-          placeholder="Password"
+          placeholder="Пароль"
           id="password"
           value={password}
           onInput={passwordHandler}
         />
 
         <label htmlFor="confirm" className={styles.label}>
-          Confirm password
+          Подтвердите пароль
         </label>
         <input
           type="password"
           className={styles.input}
-          placeholder="Confirm your password"
+          placeholder="Подтвердите ваш пароль"
           id="confirm"
           value={confirm}
           onInput={confirmHandler}
         />
         <button className={styles.button} type="submit" disabled={disabled}>
-          {isLoading ? <div className={styles.loading}>Loading...</div> : 'Submit'}
+          {isLoading ? <div className={styles.loading}>Загрузка...</div> : 'Отправить'}
         </button>
         <Link to="/login">
-          <button className={styles.buttonReg}>Log in</button>
+          <button className={styles.buttonReg}>Войти</button>
         </Link>
       </form>
     </div>

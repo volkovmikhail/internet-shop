@@ -1,11 +1,11 @@
 const { Router } = require('express');
-const getAllWears = require('../controllers/getAllWears');
-const getWearById = require('../controllers/getWearById');
-const getProfile = require('../controllers/getProfile');
-const postCheckout = require('../controllers/postCheckout');
-const postAddWear = require('../controllers/postAddWear');
-const getOrders = require('../controllers/getOrders');
-const deleteWear = require('../controllers/deleteWear');
+const getAllWears = require('../controllers/functions/getAllWears');
+const getWearById = require('../controllers/functions/getWearById');
+const getProfile = require('../controllers/functions/getProfile');
+const postCheckout = require('../controllers/functions/postCheckout');
+const postAddWear = require('../controllers/functions/postAddWear');
+const getOrders = require('../controllers/functions/getOrders');
+const deleteWear = require('../controllers/functions/deleteWear');
 const wearController = require('../controllers/wearController');
 //middleтвари
 const authMiddleware = require('../middlewares/authMiddleware');

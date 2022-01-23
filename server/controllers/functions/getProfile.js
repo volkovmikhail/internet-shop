@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const User = require('../../models/User');
 const { Types } = require('mongoose');
 
 module.exports = async (req, res) => {

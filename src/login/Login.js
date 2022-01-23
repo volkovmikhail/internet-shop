@@ -64,9 +64,9 @@ function Login() {
         <div class={styles.shape}></div>
       </div> */}
       <form className={styles.form} onSubmit={submit}>
-        <h3>Login</h3>
+        <h3>Вход</h3>
         <label htmlFor="email" className={styles.label}>
-          Email
+          Эл. почта
         </label>
         <input
           type="text"
@@ -79,22 +79,22 @@ function Login() {
         />
 
         <label htmlFor="password" className={styles.label}>
-          Password
+          Пароль
         </label>
         <input
           type="password"
           name="password"
           className={styles.input}
-          placeholder="Password"
+          placeholder="Введиет пароль"
           id="password"
           value={password}
           onInput={passwordHandler}
         />
         <button className={styles.button} type="submit" disabled={disabled}>
-          {isLoading ? <div className={styles.loading}>Loading...</div> : 'Log in'}
+          {isLoading ? <div className={styles.loading}>Загрузка...</div> : 'Войти'}
         </button>
         <Link to="/registration">
-          <button className={styles.buttonReg}>Registration</button>
+          <button className={styles.buttonReg}>Регистрация</button>
         </Link>
       </form>
     </div>

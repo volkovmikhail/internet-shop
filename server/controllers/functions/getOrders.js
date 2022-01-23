@@ -1,6 +1,6 @@
-const Orders = require('../models/Order');
+const Orders = require('../../models/Order');
 // const User = require('../models/User');
-const Wear = require('../models/Wear');
+const Wear = require('../../models/Wear');
 const { ObjectId } = require('mongoose').Types;
 
 module.exports = async (req, res) => {

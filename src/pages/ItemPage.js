@@ -33,26 +33,26 @@ function ItemPage() {
         } else {
           return (
             <div className="loadingContainer">
-              <div className="loading">Loading...</div>
+              <div className="loading">Загрузка...</div>
             </div>
           );
         }
       case 404:
         return (
           <div className="loadingContainer">
-            <h1>Item not found</h1>
+            <h1>Товар не найден</h1>
           </div>
         );
       case 0:
         return (
           <div className="loadingContainer">
-            <div className="loading">Loading...</div>
+            <div className="loading">Загрузка...</div>
           </div>
         );
       default:
         return (
           <div className="loadingContainer">
-            <h1>Item not found</h1>
+            <h1>Товар не найден</h1>
           </div>
         );
     }

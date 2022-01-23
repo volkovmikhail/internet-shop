@@ -17,24 +17,24 @@ function Menu({ active, state }) {
         to="/catalog"
         className={active === 'catalog' ? styles.linkItem + ' ' + styles.activeLinkItem : styles.linkItem}
       >
-        <h4>Catalog</h4>
+        <h4>Каталог</h4>
       </Link>
       <Link to="/cart" className={active === 'cart' ? styles.linkItem + ' ' + styles.activeLinkItem : styles.linkItem}>
-        <h4>Cart</h4>
+        <h4>Корзина</h4>
       </Link>
       {token ? (
         <Link
           to="/profile"
           className={active === 'profile' ? styles.linkItem + ' ' + styles.activeLinkItem : styles.linkItem}
         >
-          <h4>Profile</h4>
+          <h4>Профиль</h4>
         </Link>
       ) : (
         <Link
           to="/login"
           className={active === 'login' ? styles.linkItem + ' ' + styles.activeLinkItem : styles.linkItem}
         >
-          <h4>Log in</h4>
+          <h4>Войти</h4>
         </Link>
       )}
     </div>

@@ -27,15 +27,15 @@ function Profile() {
     <div>
       <Header active="profile" />
       <h1 className="title" style={{ marginBottom: '50px' }}>
-        Profile
+        Профиль
       </h1>
       <div className="container" style={{ height: '60vh' }}>
-        <h2>Your personal data:</h2>
-        <p className="title">Name: {user.name}</p>
-        <p className="title">Lastname: {user.lastname}</p>
+        <h2>Ваша личная информация:</h2>
+        <p className="title">Имя: {user.name}</p>
+        <p className="title">Фамилия: {user.lastname}</p>
         <p className="title">Email: {user.email}</p>
         <button className="logoutBtn" style={{ marginTop: '50px' }} onClick={logoutHandler}>
-          Log out
+          Выйти
         </button>
         {role === 'ADMIN' ? (
           <Link to="/dashboard">

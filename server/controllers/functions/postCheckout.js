@@ -1,5 +1,5 @@
-const Order = require('../models/Order');
-const User = require('../models/User');
+const Order = require('../../models/Order');
+const User = require('../../models/User');
 const { ObjectId } = require('mongoose').Types;
 const nodemailer = require('nodemailer');
 
@@ -16,21 +16,21 @@ module.exports = async (req, res) => {
       },
     });
     let htmlBody = '';
-    htmlBody += `<b>User: ${user.name} ${user.lastname}</b><br/>`;
-    htmlBody += `<b>Email: ${user.email}</b><br/><br/>`;
+    htmlBody += `<b>Пользователь: ${user.name} ${user.lastname}</b><br/>`;
+    htmlBody += `<b>Эл. почта: ${user.email}</b><br/><br/>`;
     htmlBody += `<h1>\tPurchases:</h1></br><ol>`;
     const data = req.body;
     const wears = [];
     let sum = 0;
     data.forEach((e) => {
-      htmlBody += `<li>${e.title} - price: ${e.price} ${e.currency} <b>x${e.count}</b></li>`;
+      htmlBody += `<li>${e.title} - цена: ${e.price} ${e.currency} <b>x${e.count}</b></li>`;
       for (let i = 0; i < e.count; i++) {
         sum += e.price;
         wears.push(ObjectId(e._id));
       }
     });
     htmlBody += '</ol><br/><hr/>';
-    htmlBody += `<b><i>Total = ${sum}</b></i>`;
+    htmlBody += `<b><i>Итог = ${sum} ${data[0].currency}</b></i>`;
     const order = new Order({ data: wears, userId: ObjectId(req.user.id), orderDate: Date.now() });
     order.save();
     await transporter.sendMail({

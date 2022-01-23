@@ -23,10 +23,10 @@ function Catalog({ wears }) {
   return (
     <div className={styles.container}>
       <div className={styles.categories}>
-        <input type="text" className={styles.input} placeholder="Search" onInput={searchHandler} />
+        <input type="text" className={styles.input} placeholder="Поиск по названию" onInput={searchHandler} />
         <div>
           <div className={styles.category} onClick={() => categoryHandler({ target: { value: 'all' } })}>
-            <p>Show all</p>
+            <p>Все категории</p>
           </div>
           {uniqueCategories.map((c, i) => {
             return (
@@ -38,9 +38,9 @@ function Catalog({ wears }) {
         </div>
       </div>
       <div className={styles.filter}>
-        <input type="text" className={styles.input} placeholder="Search" onInput={searchHandler} />
+        <input type="text" className={styles.input} placeholder="Поиск по названию" onInput={searchHandler} />
         <select className={styles.input} onChange={categoryHandler}>
-          <option value="all">All categories</option>
+          <option value="all">Все категории</option>
           {uniqueCategories.map((category, index) => {
             return (
               <option key={index} value={category}>

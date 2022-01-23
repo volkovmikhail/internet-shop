@@ -17,7 +17,7 @@ function ItemContent({ wear }) {
           {wear?.images !== undefined ? (
             wear.images.map((i, index) => <div key={index} style={{ backgroundImage: `url('${i}')` }}></div>)
           ) : (
-            <h1>Loading...</h1>
+            <h1>Загрузка...</h1>
           )}
         </div>
         <div className={styles.infoContainer}>
@@ -28,7 +28,7 @@ function ItemContent({ wear }) {
             <p>{wear.discription}</p>
           </div>
           <div className={styles.category}>
-            <p>Category: {wear.category}</p>
+            <p>Категория: {wear.category}</p>
           </div>
           <div className={styles.price}>
             <p>
@@ -36,13 +36,18 @@ function ItemContent({ wear }) {
             </p>
           </div>
           <button
-            className={styles.orderButton}
+            className={styles.orderButton + ' ' + styles.category}
             onClick={() => {
               addItemToCart(wear._id);
             }}
           >
-            ADD TO CART
+            Добавить в корзину
           </button>
+          <div >
+            <p>
+              Количество товара на складе: {wear.quantity}
+            </p>
+          </div>
         </div>
       </div>
     </main>

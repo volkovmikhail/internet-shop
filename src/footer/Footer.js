@@ -7,10 +7,10 @@ function Footer() {
       <div className="container">
         <div className={styles.contacts}>
           <div>
-            <p>Phone: +375445553344</p>
-            <p>Address: ул. Пушкина 184</p>
+            <p>Контактный телефон: +375445553344</p>
+            <p>Адрес: ул. Пушкина 184</p>
             <a href="mailto:volkov.electronics@gmail.com">
-              <p>email: volkov.electronics@gmail.com</p>
+              <p>Электронная почта: volkov.electronics@gmail.com</p>
             </a>
           </div>
         </div>

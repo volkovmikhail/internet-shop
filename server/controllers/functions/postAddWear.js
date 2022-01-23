@@ -1,4 +1,4 @@
-const Wear = require('../models/Wear');
+const Wear = require('../../models/Wear');
 const axios = require('axios').default;
 const FormData = require('form-data');
 const fs = require('fs');
@@ -7,7 +7,7 @@ const imagesApiKey = process.env.IMAGES_API_KEY;
 
 module.exports = async (req, res) => {
   try {
-    const { title, price, currency, category, discription } = req.body;
+    const { title, price, currency, category, discription, quantity } = req.body;
     //const images = req.files.map((file) => file.filename);
     const images = [];
     for (let i = 0; i < req.files.length; i++) {
@@ -29,6 +29,7 @@ module.exports = async (req, res) => {
       category,
       discription,
       images,
+      quantity
     });
     await wear.save();
     res.status(200).json({

@@ -29,6 +29,7 @@ function AddWear() {
       category = t.categorySelect.value;
     }
     const price = isNaN(parseFloat(t.price.value)) ? 0 : parseFloat(t.price.value);
+    const quantity = isNaN(parseFloat(t.quantity.value)) ? 0 : parseFloat(t.quantity.value);
     const files = t.images.files;
     const formData = new FormData();
     for (let i = 0; i < files.length; i++) {
@@ -37,6 +38,7 @@ function AddWear() {
     formData.append(`title`, t.title.value);
     formData.append(`discription`, t.discription.value);
     formData.append(`price`, price);
+    formData.append(`quantity`, quantity);
     formData.append(`category`, category);
     formData.append(`currency`, t.currency.value);
     const rawResponse = await fetch('/api/addwear', {
@@ -59,28 +61,28 @@ function AddWear() {
   return (
     <div className="container">
       <form onSubmit={submit}>
-        <h3>Add wear</h3>
+        <h3>Добавить товар</h3>
 
-        <label className={styles.label}>Title</label>
+        <label className={styles.label}>Название</label>
         <input type="text" name="title" className={styles.input} placeholder="Title" />
 
-        <label className={styles.label}>Discription</label>
+        <label className={styles.label}>Описание</label>
         <textarea name="discription" className={styles.input} placeholder="Discription" />
 
-        <label className={styles.label}>Price</label>
+        <label className={styles.label}>Цена</label>
         <input type="text" name="price" className={styles.input} placeholder="Price" />
 
-        <label className={styles.label}>Currency</label>
+        <label className={styles.label}>Валюта</label>
         <select className={styles.input} name="currency">
           <option value="BYN">BYN</option>
         </select>
 
-        <label className={styles.label}>Category</label>
+        <label className={styles.label}>Категория</label>
         <input type="text" name="category" className={styles.input} placeholder="Category" />
 
-        <label className={styles.label}>Category</label>
+        <label className={styles.label}>Быстрый выбор существующей категории</label>
         <select className={styles.input} name="categorySelect">
-          <option value="custom">Custom...</option>
+          <option value="custom">Создать новую...</option>
           {store.catalog.map((w, index) => (
             <option key={index} value={w.category}>
               {w.category}
@@ -88,11 +90,14 @@ function AddWear() {
           ))}
         </select>
 
-        <label className={styles.label}>Images</label>
+        <label className={styles.label}>Количество на складе</label>
+        <input type="text" name="quantity" className={styles.input} placeholder="Количество" />
+
+        <label className={styles.label}>Картинки</label>
         <input type="file" style={{ marginTop: '20px' }} name="images" multiple={true} />
 
         <button className={styles.button} type="submit" disabled={isLoading}>
-          {isLoading ? <div className={styles.loading}>Loading...</div> : 'Add'}
+          {isLoading ? <div className={styles.loading}>Загрузка...</div> : 'Add'}
         </button>
       </form>
     </div>
