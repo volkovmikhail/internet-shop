@@ -1,5 +1,6 @@
 const Order = require('../../models/Order');
 const User = require('../../models/User');
+const Wear = require('../../models/Wear');
 const { ObjectId } = require('mongoose').Types;
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
@@ -26,19 +27,23 @@ module.exports = async (req, res) => {
     const data = req.body;
     const wears = [];
     let sum = 0;
-    data.forEach((e) => {
-      htmlBody += `<li>${e.title} - цена: ${e.price} ${e.currency} <b>x${e.count}</b></li>`;
-      for (let i = 0; i < e.count; i++) {
-        sum += e.price;
-        wears.push(ObjectId(e._id));
-      }
-    });
-    htmlBody += '</ol><br/><hr/>';
-    htmlBody += `<b><i>Итог = ${sum} ${data[0].currency}</b></i>`;
+    //start transaction
     const session = await mongoose.startSession();
     session.startTransaction();
+    for (let j = 0; j < data.length; j++) {
+      htmlBody += `<li>${data[j].title} - цена: ${data[j].price} ${data[j].currency} <b>x${data[j].count}</b></li>`;
+      await Wear.updateOne({ _id: data[j]._id }, { $inc: { quantity: -data[j].count } }).session(session);
+      for (let i = 0; i < data[j].count; i++) {
+        sum += data[j].price;
+        wears.push(ObjectId(data[j]._id));
+      }
+    }
+    htmlBody += '</ol><br/><hr/>';
+    htmlBody += `<b><i>Итог = ${sum} ${data[0].currency}</b></i>`;
     const order = new Order({ data: wears, userId: ObjectId(req.user.id), orderDate: Date.now() });
-    await order.save();
+    await order.save({ session: session });
+    await session.commitTransaction();
+    session.endSession();
     //send
     pdf.create(htmlBody).toBuffer(async function (err, buffer) {
       if (err) {
