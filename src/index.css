@@ -151,3 +151,25 @@ p {
     clip-path: inset(0 -0.4ch 0 0);
   }
 }
+
+@keyframes anim {
+  0% {
+    transform: translateX(-150%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.input {
+  border: 1px solid rgb(203, 213, 224);
+  display: block;
+  height: 50px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 300;
+}

@@ -13,6 +13,7 @@ const roleMiddleware = require('../middlewares/roleMiddleware');
 
 const router = Router();
 
+//functions old я был тупой и совершал ошибки
 router.get('/wears', getAllWears);
 
 router.get('/wear/:id', getWearById);
@@ -27,6 +28,7 @@ router.get('/orders', roleMiddleware(['ADMIN']), getOrders);
 
 router.delete('/wear/delete/:id', roleMiddleware(['ADMIN']), deleteWear);
 
+//так лучше делать, вылелять роутер для отдельных сущностей
 router.use('/wear', wearController);
 
 module.exports = router;

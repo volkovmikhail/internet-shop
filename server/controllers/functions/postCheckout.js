@@ -24,7 +24,9 @@ module.exports = async (req, res) => {
     htmlBody += `<b>Пользователь: ${user.name} ${user.lastname}</b><br/>`;
     htmlBody += `<b>Эл. почта: ${user.email}</b><br/><br/>`;
     htmlBody += `<h1>\tТовары:</h1></br><ol>`;
-    const data = req.body;
+    const data = req.body.cart;
+    const address = req.body.address;
+    const date = req.body.date;
     const wears = [];
     let sum = 0;
     //start transaction
@@ -40,7 +42,13 @@ module.exports = async (req, res) => {
     }
     htmlBody += '</ol><br/><hr/>';
     htmlBody += `<b><i>Итог = ${sum} ${data[0].currency}</b></i>`;
-    const order = new Order({ data: wears, userId: ObjectId(req.user.id), orderDate: Date.now() });
+    const order = new Order({
+      data: wears,
+      userId: ObjectId(req.user.id),
+      orderDate: Date.now(),
+      onDate: new Date(date),
+      address: address,
+    });
     await order.save({ session: session });
     await session.commitTransaction();
     session.endSession();

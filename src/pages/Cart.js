@@ -9,9 +9,12 @@ import { clearCart } from '../actions';
 
 function Cart() {
   const store = useSelector((state) => state);
+  const [date, setDate] = useState('');
+  const [address, setaddress] = useState('');
+  const [showForm, setShowForm] = useState(false);
   const dispatch = useDispatch();
   const { token, logout } = useContext(AuthContext);
-  const [isLodaing, setLoading] = useState(false);
+  const [isLodaing, setLoading] = useState(true);
   const history = useHistory();
   function total(cart) {
     if (!cart) {
@@ -29,6 +32,9 @@ function Cart() {
       history.push('/login');
       return;
     }
+    if (isLodaing) {
+      return;
+    }
     setLoading(true);
     const raw = await fetch('/api/checkout', {
       method: 'POST',
@@ -37,10 +43,10 @@ function Cart() {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(store.cart),
+      body: JSON.stringify({cart:store.cart, address, date}),
     });
     if (raw.status === 200) {
-      alert('The order is placed, the manager will contact you via email');
+      alert('The order is placed, the manager will contact you for confirm');
     } else if (raw.status === 400) {
       logout();
       history.push('/login');
@@ -54,6 +60,33 @@ function Cart() {
     history.push('/catalog');
   }
 
+  function onDateHandler(e) {
+    setDate(e.target.value);
+    setButtonState(e.target.value, address);
+  }
+
+  function addressHandler(e) {
+    setaddress(e.target.value);
+    setButtonState(date, e.target.value);
+  }
+
+  function setButtonState(dateParam, addressParam) {
+    if (addressParam.trim().length > 1 && Boolean(dateParam)) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+  }
+
+  const addressStyle =
+    address.trim().length > 1
+      ? { width: '100%', marginBottom: '1rem' }
+      : { width: '100%', marginBottom: '1rem', borderColor: 'salmon' };
+
+  const dateStyle = date
+    ? { width: '100%', marginBottom: '1rem' }
+    : { width: '100%', marginBottom: '1rem', borderColor: 'salmon' };
+
   return (
     <div>
       <Header active="cart" />
@@ -62,11 +95,64 @@ function Cart() {
       {store.cart?.length ? (
         <div>
           <h1 className="title">Всего: {total(store.cart)} BYN</h1>
-          <div className="container" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <button className="logoutBtn" style={{ width: '200px' }} onClick={checkout} disabled={isLodaing}>
-              Заказать
-            </button>
-          </div>
+          {showForm ? (
+            <div
+              className="container"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-end',
+                animation: 'anim 1s forwards',
+              }}
+            >
+              <div
+                style={{
+                  marginBottom: '1rem',
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                  flexDirection: 'column',
+                }}
+              >
+                <div style={{ maxWidth: '700px', width: '100%' }}>
+                  <label htmlFor="order_datetime">Заказать на дату</label>
+                  <input
+                    className="input"
+                    type="datetime-local"
+                    name="order_datetime"
+                    id="order_datetime"
+                    style={dateStyle}
+                    onChange={onDateHandler}
+                  />
+
+                  <label htmlFor="address">Адрес</label>
+                  <input
+                    className="input"
+                    type="text"
+                    name="address"
+                    id="address"
+                    style={addressStyle}
+                    onInput={addressHandler}
+                  />
+                </div>
+              </div>
+              <button className="logoutBtn" style={{ width: '200px' }} onClick={checkout} disabled={isLodaing}>
+                Заказать
+              </button>
+            </div>
+          ) : (
+            <div className="container" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <button
+                className="logoutBtn"
+                style={{ width: '300px' }}
+                onClick={() => {
+                  setShowForm(true);
+                }}
+              >
+                Перейти к оформлению
+              </button>
+            </div>
+          )}
         </div>
       ) : null}
       <Footer />
