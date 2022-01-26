@@ -10,6 +10,9 @@ module.exports = async (req, res) => {
   try {
     //prepare
     const user = await User.findOne({ _id: ObjectId(req.user.id) });
+    const data = req.body.cart;
+    const address = req.body.address;
+    const date = req.body.date;
     let transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 587,
@@ -22,11 +25,11 @@ module.exports = async (req, res) => {
     //making html
     let htmlBody = '';
     htmlBody += `<b>Пользователь: ${user.name} ${user.lastname}</b><br/>`;
-    htmlBody += `<b>Эл. почта: ${user.email}</b><br/><br/>`;
-    htmlBody += `<h1>\tТовары:</h1></br><ol>`;
-    const data = req.body.cart;
-    const address = req.body.address;
-    const date = req.body.date;
+    htmlBody += `<b>Номер телефона: ${user.phone || '-'}</b><br/>`;
+    htmlBody += `<b>Эл. почта: ${user.email}</b><br/>`;
+    htmlBody += `<b>Заказ на дату: ${new Date(date).toLocaleDateString('en-GB')} ${new Date(date).toLocaleTimeString('en-GB')}</b><br/>`;
+    htmlBody += `<b>Адрес: ${address}</b><br/>`;
+    htmlBody += `<h1>\tТовары:</h1><ol>`;
     const wears = [];
     let sum = 0;
     //start transaction
@@ -40,7 +43,7 @@ module.exports = async (req, res) => {
         wears.push(ObjectId(data[j]._id));
       }
     }
-    htmlBody += '</ol><br/><hr/>';
+    htmlBody += '</ol><hr/>';
     htmlBody += `<b><i>Итог = ${sum} ${data[0].currency}</b></i>`;
     const order = new Order({
       data: wears,

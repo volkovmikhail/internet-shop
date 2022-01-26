@@ -43,7 +43,7 @@ function Cart() {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({cart:store.cart, address, date}),
+      body: JSON.stringify({ cart: store.cart, address, date }),
     });
     if (raw.status === 200) {
       alert('The order is placed, the manager will contact you for confirm');
@@ -71,7 +71,7 @@ function Cart() {
   }
 
   function setButtonState(dateParam, addressParam) {
-    if (addressParam.trim().length > 1 && Boolean(dateParam)) {
+    if (addressParam.trim().length > 1 && dateParam && new Date(dateParam)?.getTime() > new Date().getTime()) {
       setLoading(false);
     } else {
       setLoading(true);
@@ -83,9 +83,10 @@ function Cart() {
       ? { width: '100%', marginBottom: '1rem' }
       : { width: '100%', marginBottom: '1rem', borderColor: 'salmon' };
 
-  const dateStyle = date
-    ? { width: '100%', marginBottom: '1rem' }
-    : { width: '100%', marginBottom: '1rem', borderColor: 'salmon' };
+  const dateStyle =
+    date && new Date(date) > new Date()
+      ? { width: '100%', marginBottom: '1rem' }
+      : { width: '100%', marginBottom: '1rem', borderColor: 'salmon' };
 
   return (
     <div>

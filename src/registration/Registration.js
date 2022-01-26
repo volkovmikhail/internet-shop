@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 // eslint-disable-next-line no-useless-escape
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const phoneRegex = /^(\+375|80)(29|25|44|33|17)(\d{3})(\d{2})(\d{2})$/;
 
 function Registration() {
   const [disabled, setDisabled] = useState(true);
@@ -13,6 +14,7 @@ function Registration() {
   const [lastname, setLastame] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
+  const [phone, setPhone] = useState('');
   const history = useHistory();
 
   async function submit(e) {
@@ -24,7 +26,7 @@ function Registration() {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password, name, lastname }),
+      body: JSON.stringify({ email, password, name, lastname, phone }),
     });
     if (rawResponse.status === 400) {
       alert('Somthing wrong, maybe this email already exist');
@@ -35,33 +37,46 @@ function Registration() {
     history.push('/login');
   }
 
+  function phoneHandler(e) {
+    const p = e.target.value.replaceAll('(', '').replaceAll(')', '').replaceAll('-', '').replaceAll(' ', '');
+    setPhone(p);
+    validate(name, lastname, email, password, confirm, p);
+  }
+
   function emailHandler(e) {
     setEmail(e.target.value);
-    validate(name, lastname, e.target.value, password, confirm);
+    validate(name, lastname, e.target.value, password, confirm, phone);
   }
 
   function passwordHandler(e) {
     setPassword(e.target.value);
-    validate(name, lastname, email, e.target.value, confirm);
+    validate(name, lastname, email, e.target.value, confirm, phone);
   }
 
   function nameHandler(e) {
     setName(e.target.value);
-    validate(e.target.value, lastname, email, password, confirm);
+    validate(e.target.value, lastname, email, password, confirm, phone);
   }
 
   function lastnnameHandler(e) {
     setLastame(e.target.value);
-    validate(name, e.target.value, email, password, confirm);
+    validate(name, e.target.value, email, password, confirm, phone);
   }
 
   function confirmHandler(e) {
     setConfirm(e.target.value);
-    validate(name, lastname, email, password, e.target.value);
+    validate(name, lastname, email, password, e.target.value, phone);
   }
 
-  function validate(n, ln, em, pw, conf) {
-    if (n.length < 3 || !em.match(regexEmail) || ln.length < 3 || pw.length < 8 || conf !== pw) {
+  function validate(n, ln, em, pw, conf, ph) {
+    if (
+      n.length < 3 ||
+      !em.match(regexEmail) ||
+      ln.length < 3 ||
+      pw.length < 8 ||
+      conf !== pw ||
+      !ph.match(phoneRegex)
+    ) {
       setDisabled(true);
     } else {
       setDisabled(false);
@@ -96,6 +111,19 @@ function Registration() {
           id="lastname"
           value={lastname}
           onInput={lastnnameHandler}
+        />
+
+        <label htmlFor="phone" className={styles.label}>
+          Телефон
+        </label>
+        <input
+          type="tel"
+          name="phone"
+          className={styles.input}
+          placeholder="Ваш номер телефона"
+          id="phone"
+          value={phone}
+          onInput={phoneHandler}
         />
 
         <label htmlFor="email" className={styles.label}>

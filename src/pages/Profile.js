@@ -34,6 +34,7 @@ function Profile() {
         <p className="title">Имя: {user.name}</p>
         <p className="title">Фамилия: {user.lastname}</p>
         <p className="title">Email: {user.email}</p>
+        <p className="title">Телефон: {user.phone || '-'}</p>
         <button className="logoutBtn" style={{ marginTop: '50px' }} onClick={logoutHandler}>
           Выйти
         </button>
