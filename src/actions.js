@@ -10,6 +10,15 @@ export function fetchWears() {
   };
 }
 
+export function setWears(wears) {
+  return (dispatch) => {
+    dispatch({
+      type: FETCH_WEARS,
+      payload: wears,
+    });
+  };
+}
+
 export function addToCart(id) {
   return (dispatch) => {
     dispatch({

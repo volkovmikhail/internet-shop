@@ -1,4 +1,4 @@
-import { ADD_TO_CART, CLEAR_CART, DELETE_FROM_CART, FETCH_USERDATA, FETCH_WEARS } from './actionTypes';
+import { ADD_TO_CART, CLEAR_CART, DELETE_FROM_CART, FETCH_USERDATA, FETCH_WEARS} from './actionTypes';
 
 const initState = {
   catalog: [],

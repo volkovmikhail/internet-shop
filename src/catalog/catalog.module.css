@@ -5,6 +5,16 @@
   margin-bottom: 25px;
 }
 
+.filterSelect{
+  margin-bottom: 25px;
+}
+
+.cardsAndFilters{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
 .categories {
   display: flex;
   width: 20%;
@@ -31,6 +41,10 @@
   border-radius: 1rem;
   border: 1px solid;
   border-color: #000;
+}
+
+.category>p{
+  font-size: 15px;
 }
 
 .category:hover {

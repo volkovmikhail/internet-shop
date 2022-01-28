@@ -11,7 +11,8 @@ module.exports = async (req, res) => {
     res.status(200).json({
       email: user.email,
       name: user.name,
-      lastname: user.lastname
+      lastname: user.lastname,
+      phone: user.phone,
     });
   } catch (error) {
     res.status(400).json({ message: 'User not found' });

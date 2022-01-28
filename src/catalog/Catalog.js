@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import styles from './catalog.module.css';
 import Card from './card/Card.js';
+import { useDispatch } from 'react-redux';
+import { setWears } from '../actions';
 
 function Catalog({ wears }) {
   //бля всю ночь это писать
   //я заебался
-  //по факту это компонент контейнер, типо выводит много раз компонент карточка, пиздец
-  //ладно приступим к фильтру товаров....
-  const uniqueCategories = [...new Set(wears.map((wear) => wear.category))];
+  const uniqueCategories = [...new Set(wears.map((wear) => wear.category))].sort();
   const [state, setState] = useState(wears);
+  const dispatch = useDispatch();
 
   function searchHandler(e) {
     const { value } = e.target;
@@ -18,6 +19,40 @@ function Catalog({ wears }) {
   function categoryHandler(e) {
     const { value } = e.target;
     setState(value === 'all' ? wears : wears.filter((wear) => wear.category === value));
+  }
+
+  function filterHandler(e) {
+    const arr = state;
+    switch (e.target.value) {
+      case 'pop':
+        break;
+      case 'lowToHight':
+        for (let i = 0, endI = arr.length - 1; i < endI; i++) {
+          for (let j = 0, endJ = endI - i; j < endJ; j++) {
+            if (arr[j].price > arr[j + 1].price) {
+              let swap = arr[j];
+              arr[j] = arr[j + 1];
+              arr[j + 1] = swap;
+            }
+          }
+        }
+        dispatch(setWears(arr));
+        break;
+      case 'highToLow':
+        for (let i = 0, endI = arr.length - 1; i < endI; i++) {
+          for (let j = 0, endJ = endI - i; j < endJ; j++) {
+            if (arr[j].price < arr[j + 1].price) {
+              let swap = arr[j];
+              arr[j] = arr[j + 1];
+              arr[j + 1] = swap;
+            }
+          }
+        }
+        dispatch(setWears(arr));
+        break;
+      default:
+        break;
+    }
   }
 
   return (
@@ -50,19 +85,30 @@ function Catalog({ wears }) {
           })}
         </select>
       </div>
-      <div className={styles.cardContainer}>
-        {state.map((wear, index) => {
-          return (
-            <Card
-              key={index}
-              id={wear._id}
-              url={wear.images[0]}
-              title={wear.title}
-              price={wear.price}
-              currency={wear.currency}
-            />
-          );
-        })}
+      <div className={styles.cardsAndFilters}>
+        <div className={styles.filterSelect}>
+          <select className={styles.input} style={{ maxWidth: '200px' }} onChange={filterHandler}>
+            <option value="pop" defaultValue>
+              По популярности
+            </option>
+            <option value="lowToHight">По возрастанию цены</option>
+            <option value="highToLow">По убыванию цены</option>
+          </select>
+        </div>
+        <div className={styles.cardContainer}>
+          {state.map((wear, index) => {
+            return (
+              <Card
+                key={index}
+                id={wear._id}
+                url={wear.images[0]}
+                title={wear.title}
+                price={wear.price}
+                currency={wear.currency}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );
