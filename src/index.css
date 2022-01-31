@@ -42,7 +42,6 @@ p {
   width: 100%;
   max-width: 90%;
   margin: 50px auto 25px;
-  text-transform: uppercase;
 }
 
 .loadingContainer {
@@ -172,4 +171,23 @@ p {
   margin-top: 8px;
   font-size: 14px;
   font-weight: 300;
+}
+
+.text {
+  display: inline-block;
+  height: 34px;
+  font-size: 24px;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.text:hover {
+  border-bottom: 2px solid rgb(203, 213, 224);
+}
+
+.activeText {
+  border-bottom: 2px solid #000;
+}
+.activeText:hover {
+  border-bottom: 2px solid #000;
 }

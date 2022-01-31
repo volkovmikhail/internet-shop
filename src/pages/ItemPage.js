@@ -23,6 +23,7 @@ function ItemPage() {
     setStatus(raw.status);
     const data = await raw.json();
     setState(data);
+    await fetch(`/api/wear/popularity?id=${getItemIdFromUrl()}&popularity=1`, { method: 'PATCH' });
   }
 
   function html() {

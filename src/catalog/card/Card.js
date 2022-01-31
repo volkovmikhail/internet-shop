@@ -19,6 +19,7 @@ function Card({ url, title, price, currency, id }) {
   }, [id, store.cart]);
 
   function addItemToCart(itemId) {
+    fetch(`/api/wear/popularity?id=${itemId}&popularity=${2}`, { method: 'PATCH' });
     dispath(addToCart(itemId));
   }
 

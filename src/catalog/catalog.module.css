@@ -5,11 +5,11 @@
   margin-bottom: 25px;
 }
 
-.filterSelect{
+.filterSelect {
   margin-bottom: 25px;
 }
 
-.cardsAndFilters{
+.cardsAndFilters {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -19,6 +19,7 @@
   display: flex;
   width: 20%;
   flex-direction: column;
+  margin-right: 2rem;
 }
 
 .categories > div {
@@ -29,27 +30,36 @@
   -webkit-transition: all 0.7s ease-out;
   transition: all 0.7s ease-out;
   -webkit-transition: all 0.7s;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
   transition: all 0.7s;
   cursor: pointer;
-  display: flex;
-  background-color: #000;
+  background-color: #fff;
   margin: 7px 0;
-  color: #fff;
+  color: #000;
   height: 2.5rem;
-  justify-content: center;
-  align-items: center;
   border-radius: 1rem;
-  border: 1px solid;
-  border-color: #000;
+  border: 1px solid #fff;
 }
 
-.category>p{
-  font-size: 15px;
+.activeCat {
+  background-color: #000;
+  color: #fff;
+}
+
+.category > p {
+  font-size: 1rem;
 }
 
 .category:hover {
   color: #000;
-  background-color: #ffffff;
+  background-color: rgb(203, 213, 224);
+}
+
+.activeCat:hover {
+  background-color: #000;
+  color: #fff;
 }
 
 .container {
@@ -58,7 +68,6 @@
   width: 100%;
   max-width: 90%;
   margin: auto;
-  column-gap: 2rem;
 }
 
 .cardContainer {

@@ -27,7 +27,9 @@ module.exports = async (req, res) => {
     htmlBody += `<b>Пользователь: ${user.name} ${user.lastname}</b><br/>`;
     htmlBody += `<b>Номер телефона: ${user.phone || '-'}</b><br/>`;
     htmlBody += `<b>Эл. почта: ${user.email}</b><br/>`;
-    htmlBody += `<b>Заказ на дату: ${new Date(date).toLocaleDateString('en-GB')} ${new Date(date).toLocaleTimeString('en-GB')}</b><br/>`;
+    htmlBody += `<b>Заказ на дату: ${new Date(date).toLocaleDateString('en-GB')} ${new Date(date).toLocaleTimeString(
+      'en-GB'
+    )}</b><br/>`;
     htmlBody += `<b>Адрес: ${address}</b><br/>`;
     htmlBody += `<h1>\tТовары:</h1><ol>`;
     const wears = [];
@@ -37,7 +39,9 @@ module.exports = async (req, res) => {
     session.startTransaction();
     for (let j = 0; j < data.length; j++) {
       htmlBody += `<li>${data[j].title} - цена: ${data[j].price} ${data[j].currency} <b>x${data[j].count}</b></li>`;
-      await Wear.updateOne({ _id: data[j]._id }, { $inc: { quantity: -data[j].count } }).session(session);
+      await Wear.updateOne({ _id: data[j]._id }, { $inc: { quantity: -data[j].count, popularity: 5 } }).session(
+        session
+      );
       for (let i = 0; i < data[j].count; i++) {
         sum += data[j].price;
         wears.push(ObjectId(data[j]._id));

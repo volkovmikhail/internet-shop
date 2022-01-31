@@ -91,7 +91,7 @@ function Cart() {
   return (
     <div>
       <Header active="cart" />
-      <h1 className="title">cart</h1>
+      <h1 className="title">Корзина</h1>
       {store.cart?.length ? <CartContent cart={store.cart} /> : <h1 className="loadingContainer">Корзина пуста</h1>}
       {store.cart?.length ? (
         <div>

@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './catalog.module.css';
 import Card from './card/Card.js';
 import { useDispatch } from 'react-redux';
 import { setWears } from '../actions';
 
-function Catalog({ wears }) {
-  //бля всю ночь это писать
-  //я заебался
+function Catalog({ wears, sex }) {
   const uniqueCategories = [...new Set(wears.map((wear) => wear.category))].sort();
-  const [state, setState] = useState(wears);
+  const [state, setState] = useState(sort(wears, 'popularity', 0));
+  const [activeCat, setActiveCat] = useState('all');
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setState(sort(wears, 'popularity', 0));
+  }, [sex]);
 
   function searchHandler(e) {
     const { value } = e.target;
@@ -18,41 +21,55 @@ function Catalog({ wears }) {
 
   function categoryHandler(e) {
     const { value } = e.target;
+    setActiveCat(value);
     setState(value === 'all' ? wears : wears.filter((wear) => wear.category === value));
   }
 
   function filterHandler(e) {
     const arr = state;
+    let result = [];
     switch (e.target.value) {
       case 'pop':
+        result = sort(arr, 'popularity', 0);
+        dispatch(setWears(arr));
         break;
       case 'lowToHight':
-        for (let i = 0, endI = arr.length - 1; i < endI; i++) {
-          for (let j = 0, endJ = endI - i; j < endJ; j++) {
-            if (arr[j].price > arr[j + 1].price) {
-              let swap = arr[j];
-              arr[j] = arr[j + 1];
-              arr[j + 1] = swap;
-            }
-          }
-        }
+        result = sort(arr, 'price', 1);
         dispatch(setWears(arr));
         break;
       case 'highToLow':
-        for (let i = 0, endI = arr.length - 1; i < endI; i++) {
-          for (let j = 0, endJ = endI - i; j < endJ; j++) {
-            if (arr[j].price < arr[j + 1].price) {
-              let swap = arr[j];
-              arr[j] = arr[j + 1];
-              arr[j + 1] = swap;
-            }
-          }
-        }
-        dispatch(setWears(arr));
+        result = sort(arr, 'price', 0);
+        dispatch(setWears(result));
         break;
       default:
         break;
     }
+  }
+
+  function sort(arr, field, asc = 1) {
+    for (let i = 0, endI = arr.length - 1; i < endI; i++) {
+      for (let j = 0, endJ = endI - i; j < endJ; j++) {
+        switch (asc) {
+          case 1:
+            if (arr[j][field] > arr[j + 1][field]) {
+              let swap = arr[j];
+              arr[j] = arr[j + 1];
+              arr[j + 1] = swap;
+            }
+            break;
+          case 0:
+            if (arr[j][field] < arr[j + 1][field]) {
+              let swap = arr[j];
+              arr[j] = arr[j + 1];
+              arr[j + 1] = swap;
+            }
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    return arr;
   }
 
   return (
@@ -60,12 +77,19 @@ function Catalog({ wears }) {
       <div className={styles.categories}>
         <input type="text" className={styles.input} placeholder="Поиск по названию" onInput={searchHandler} />
         <div>
-          <div className={styles.category} onClick={() => categoryHandler({ target: { value: 'all' } })}>
+          <div
+            className={`${styles.category} ${'all' === activeCat ? styles.activeCat : ''}`}
+            onClick={() => categoryHandler({ target: { value: 'all' } })}
+          >
             <p>Все категории</p>
           </div>
           {uniqueCategories.map((c, i) => {
             return (
-              <div className={styles.category} key={i} onClick={() => categoryHandler({ target: { value: c } })}>
+              <div
+                className={`${styles.category} ${c === activeCat ? styles.activeCat : ''}`}
+                key={i}
+                onClick={() => categoryHandler({ target: { value: c } })}
+              >
                 <p>{c}</p>
               </div>
             );

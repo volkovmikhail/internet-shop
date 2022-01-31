@@ -28,7 +28,7 @@ router.get('/orders', roleMiddleware(['ADMIN']), getOrders);
 
 router.delete('/wear/delete/:id', roleMiddleware(['ADMIN']), deleteWear);
 
-//так лучше делать, вылелять роутер для отдельных сущностей
+//так лучше делать, выделять роутер для отдельных сущностей
 router.use('/wear', wearController);
 
 module.exports = router;

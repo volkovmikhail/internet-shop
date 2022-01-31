@@ -34,7 +34,7 @@ router.put('/:id', async (req, res) => {
         category,
         discription,
         images,
-        quantity
+        quantity,
       }
     );
     res.status(201).json({
@@ -44,6 +44,16 @@ router.put('/:id', async (req, res) => {
     res.status(500).json({
       message: 'Somthing wrong',
     });
+    console.log(error);
+  }
+});
+
+router.patch('/popularity', async (req, res) => {
+  try {
+    const { id, popularity } = req.query;
+    await Wear.updateOne({ _id: ObjectId(id) }, { $inc: { popularity: popularity } });
+    res.status(204).json({ message: 'popularity is added' });
+  } catch (error) {
     console.log(error);
   }
 });
