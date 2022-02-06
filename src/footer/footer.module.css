@@ -7,8 +7,12 @@
   align-items: center;
 }
 
-.contacts{
-    height: 100%;
-    display: flex;
-    align-items: center;
+.contacts {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.footerText {
+  margin: 1rem 0;
 }

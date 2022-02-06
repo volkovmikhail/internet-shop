@@ -28,10 +28,6 @@ function Cart() {
   }
 
   async function checkout() {
-    if (!token) {
-      history.push('/login');
-      return;
-    }
     if (isLodaing) {
       return;
     }
@@ -76,6 +72,14 @@ function Cart() {
     } else {
       setLoading(true);
     }
+  }
+
+  function propareOrder() {
+    if (!token) {
+      history.push('/login');
+      return;
+    }
+    setShowForm(true);
   }
 
   const addressStyle =
@@ -147,7 +151,7 @@ function Cart() {
                 className="logoutBtn"
                 style={{ width: '300px' }}
                 onClick={() => {
-                  setShowForm(true);
+                  propareOrder();
                 }}
               >
                 Перейти к оформлению

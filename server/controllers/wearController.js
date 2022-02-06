@@ -5,26 +5,12 @@ const { ObjectId } = require('mongoose').Types;
 const axios = require('axios').default;
 const FormData = require('form-data');
 const fs = require('fs');
+const roleMiddleware = require('../middlewares/roleMiddleware');
 const imagesApiKey = process.env.IMAGES_API_KEY;
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', roleMiddleware(['ADMIN']), async (req, res) => {
   try {
-    const { title, price, currency, category, discription, quantity } = req.body;
-    //const images = req.files.map((file) => file.filename);
-    const images = [];
-    const filesLen = req.files.length || 0;
-    for (let i = 0; i < filesLen; i++) {
-      const form = new FormData();
-      form.append('image', fs.createReadStream(req.files[i].path));
-      const res = await axios.post(`https://api.imgbb.com/1/upload?key=${imagesApiKey}`, form, {
-        headers: {
-          ...form.getHeaders(),
-        },
-      });
-      images.push(res.data.data.url);
-      fs.rmSync(req.files[i].path);
-    }
-
+    const { title, price, currency, category, discription, quantity, images, sex } = req.body;
     await Wear.updateOne(
       { _id: ObjectId(req.params.id) },
       {
@@ -33,12 +19,13 @@ router.put('/:id', async (req, res) => {
         currency,
         category,
         discription,
-        images,
+        images: JSON.parse(images),
         quantity,
+        sex,
       }
     );
-    res.status(201).json({
-      message: 'created',
+    res.status(200).json({
+      message: 'updated',
     });
   } catch (error) {
     res.status(500).json({
@@ -55,6 +42,24 @@ router.patch('/popularity', async (req, res) => {
     res.status(204).json({ message: 'popularity is added' });
   } catch (error) {
     console.log(error);
+  }
+});
+
+router.post('/image', roleMiddleware(['ADMIN']), async (req, res) => {
+  try {
+    const form = new FormData();
+    form.append('image', fs.createReadStream(req.files[0].path));
+    const resp = await axios.post(`https://api.imgbb.com/1/upload?key=${imagesApiKey}`, form, {
+      headers: {
+        ...form.getHeaders(),
+      },
+    });
+    const imageUrl = resp.data.data.url;
+    fs.rmSync(req.files[0].path);
+    res.status(200).json({ imageUrl });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'somthing wrong' });
   }
 });
 

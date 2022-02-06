@@ -12,7 +12,7 @@ function Shop() {
   useEffect(() => {
     dispatch(fetchWears());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sex]);
 
   function changeSex(sex) {
     setSex(sex);
@@ -40,7 +40,7 @@ function Shop() {
         </div>
       </div>
       {store.catalog?.length ? (
-        <Catalog wears={store.catalog.filter((w) => w.sex === sex)} sex={sex}/>
+        <Catalog wears={store.catalog.filter((w) => w.sex === sex)} sex={sex} />
       ) : (
         <div className="loadingContainer">
           <div className="loader"></div>

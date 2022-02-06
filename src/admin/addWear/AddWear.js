@@ -2,8 +2,10 @@ import React, { useState, useContext } from 'react';
 import styles from './addwear.module.css';
 import { useSelector } from 'react-redux';
 import { AuthContext } from '../../AuthContext';
+import { useAlert } from 'react-alert';
 
-function AddWear() {
+function AddWear({ wear }) {
+  const alert = useAlert();
   const store = useSelector((s) => s);
   const { token } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +20,8 @@ function AddWear() {
       t.price.value.trim().length < 1 ||
       t.images.files.length === 0
     ) {
-      alert('Somthing wrong with data');
+      alert.error('Что-то не так с данными!');
+      setIsLoading(false);
       return;
     }
     let category;
@@ -41,6 +44,7 @@ function AddWear() {
     formData.append(`quantity`, quantity);
     formData.append(`category`, category);
     formData.append(`currency`, t.currency.value);
+    formData.append(`sex`, t.sex.value);
     const rawResponse = await fetch('/api/addwear', {
       method: 'POST',
       headers: {
@@ -59,7 +63,7 @@ function AddWear() {
   }
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       <form onSubmit={submit}>
         <h3>Добавить товар</h3>
 
@@ -67,7 +71,7 @@ function AddWear() {
         <input type="text" name="title" className={styles.input} placeholder="Title" />
 
         <label className={styles.label}>Описание</label>
-        <textarea name="discription" className={styles.input} placeholder="Discription" />
+        <textarea name="discription" className={styles.input} />
 
         <label className={styles.label}>Цена</label>
         <input type="text" name="price" className={styles.input} placeholder="Price" />
@@ -75,6 +79,12 @@ function AddWear() {
         <label className={styles.label}>Валюта</label>
         <select className={styles.input} name="currency">
           <option value="BYN">BYN</option>
+        </select>
+
+        <label className={styles.label}>Мужское / Женское</label>
+        <select className={styles.input} name="sex">
+          <option value="1">Мужское</option>
+          <option value="0">Женское</option>
         </select>
 
         <label className={styles.label}>Категория</label>

@@ -30,6 +30,67 @@
   bottom: -80px;
 } */
 
+.images {
+  width: 100%;
+  display: flex;
+}
+
+.image {
+  height: 150px;
+  width: 150px;
+  border-radius: 3px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  margin: 5px;
+  border: rgb(203, 213, 224) 1px solid;
+}
+
+.image > button {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: salmon;
+  opacity: 0.4;
+  border: 1px salmon solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2px;
+  transition: 1s ease-out all;
+}
+
+.image > button:hover {
+  opacity: 1;
+}
+
+.file {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.fileLable {
+  display: flex;
+  background-color: #fff;
+  color: rgb(203, 213, 224);
+  transition: all 0.7s ease-out;
+  align-items: center;
+  justify-content: center;
+  border: rgb(203, 213, 224) 1px solid;
+  border-radius: 3px;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.fileLable:hover {
+  background-color: rgb(203, 213, 224);
+  color: #fff;
+}
+
 .main {
 }
 
@@ -39,6 +100,7 @@
   font-size: 16px;
   font-weight: 500;
 }
+
 .input {
   border: 1px solid rgb(203, 213, 224);
   display: block;
@@ -98,7 +160,7 @@
   }
 }
 
-.container{
+.container {
   max-width: 900px;
   margin: 0 auto;
   padding: 0 25px;

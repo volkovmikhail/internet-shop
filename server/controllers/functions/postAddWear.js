@@ -7,7 +7,7 @@ const imagesApiKey = process.env.IMAGES_API_KEY;
 
 module.exports = async (req, res) => {
   try {
-    const { title, price, currency, category, discription, quantity } = req.body;
+    const { title, price, currency, category, discription, quantity, sex } = req.body;
     //const images = req.files.map((file) => file.filename);
     const images = [];
     for (let i = 0; i < req.files.length; i++) {
@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
       form.append('image', fs.createReadStream(req.files[i].path));
       const res = await axios.post(`https://api.imgbb.com/1/upload?key=${imagesApiKey}`, form, {
         headers: {
-          ...form.getHeaders()
+          ...form.getHeaders(),
         },
       });
       images.push(res.data.data.url);
@@ -29,12 +29,13 @@ module.exports = async (req, res) => {
       category,
       discription,
       images,
-      quantity
+      quantity,
+      sex,
     });
     await wear.save();
     res.status(200).json({
-      message: 'created'
-    })
+      message: 'created',
+    });
   } catch (error) {
     res.status(500).json({
       message: 'Somthing wrong',

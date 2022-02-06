@@ -1,22 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import styles from './catalog.module.css';
 import Card from './card/Card.js';
-import { useDispatch } from 'react-redux';
-import { setWears } from '../actions';
 
 function Catalog({ wears, sex }) {
   const uniqueCategories = [...new Set(wears.map((wear) => wear.category))].sort();
-  const [state, setState] = useState(sort(wears, 'popularity', 0));
+  const [state, setState] = useState(wears);
   const [activeCat, setActiveCat] = useState('all');
-  const dispatch = useDispatch();
-
   useEffect(() => {
     setState(sort(wears, 'popularity', 0));
+    setActiveCat('all');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sex]);
 
   function searchHandler(e) {
     const { value } = e.target;
-    setState(wears.filter((wear) => wear.title.toUpperCase().includes(value.trim().toUpperCase())));
+    setState(wears.filter((s) => s.title.toUpperCase().includes(value.trim().toUpperCase())));
   }
 
   function categoryHandler(e) {
@@ -27,19 +25,15 @@ function Catalog({ wears, sex }) {
 
   function filterHandler(e) {
     const arr = state;
-    let result = [];
     switch (e.target.value) {
       case 'pop':
-        result = sort(arr, 'popularity', 0);
-        dispatch(setWears(arr));
+        setState([...sort(arr, 'popularity', 0)]);
         break;
       case 'lowToHight':
-        result = sort(arr, 'price', 1);
-        dispatch(setWears(arr));
+        setState([...sort(arr, 'price', 1)]);
         break;
       case 'highToLow':
-        result = sort(arr, 'price', 0);
-        dispatch(setWears(result));
+        setState([...sort(arr, 'price', 0)]);
         break;
       default:
         break;
