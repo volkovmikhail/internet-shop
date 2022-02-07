@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
-import AddWear from '../admin/addWear/AddWear';
 import Wears from '../admin/wears/Wears';
 import Orders from '../admin/orders/Orders';
+import WearFrom from '../admin/WearForm';
+import { useSelector } from 'react-redux';
 
 function Dashboard() {
   const [state, setState] = useState('add');
+  const store = useSelector((store) => store);
 
   function switchComponent(state) {
     switch (state) {
       case 'add':
-        return <AddWear />;
+        return <WearFrom id={null} isUpdate={false} wears={store.catalog} />;
       case 'wears':
         return <Wears />;
       case 'orders':

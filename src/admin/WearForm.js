@@ -20,22 +20,26 @@ function WearFrom({ id, isUpdate, wears }) {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    fetch(`/api/wear/${id}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        const d = data.data[0];
-        setImages(d.images);
-        setCategory(d.category);
-        setQuantity(d.quantity);
-        setSex(d.sex);
-        setCurrency(d.currency);
-        setPrice(d.price);
-        setDiscription(d.discription);
-        setTitle(d.title);
-        setDisabledSubmit(false);
-      });
+    if (isUpdate) {
+      fetch(`/api/wear/${id}`)
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          const d = data.data[0];
+          setImages(d.images);
+          setCategory(d.category);
+          setQuantity(d.quantity);
+          setSex(d.sex);
+          setCurrency(d.currency);
+          setPrice(d.price);
+          setDiscription(d.discription);
+          setTitle(d.title);
+          setDisabledSubmit(false);
+        });
+      return;
+    }
+    setDisabledSubmit(false);
   }, [id]);
 
   function categoryHandler(value, isSelect) {
@@ -52,10 +56,12 @@ function WearFrom({ id, isUpdate, wears }) {
       return;
     }
     const formData = new FormData();
-    formData.append(`images`, e.target.files[0]);
+    for (let i = 0; i < e.target.files.length; i++) {
+      formData.append(`images`, e.target.files[i]);
+    }
     try {
       const response = await (
-        await fetch('/api/wear/image', {
+        await fetch('/api/wear/images', {
           method: 'POST',
           headers: {
             Authorization: `Bearer ${token}`,
@@ -63,7 +69,7 @@ function WearFrom({ id, isUpdate, wears }) {
           body: formData,
         })
       ).json();
-      setImages([...images, response.imageUrl]);
+      setImages([...images, ...response]);
       e.target.value = null;
     } catch (error) {
       alert.error('Failed to upload');
@@ -104,8 +110,9 @@ function WearFrom({ id, isUpdate, wears }) {
     formData.append(`category`, category);
     formData.append(`currency`, currency);
     formData.append(`sex`, sex);
-    const rawResponse = await fetch(`/api/wear/${id}`, {
-      method: 'PUT',
+    const url = isUpdate ? `/api/wear/${id}` : '/api/addwear';
+    const rawResponse = await fetch(url, {
+      method: isUpdate ? 'PUT' : 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -117,7 +124,17 @@ function WearFrom({ id, isUpdate, wears }) {
       return;
     }
     setDisabledSubmit(false);
-    alert.success('Успешно обновлено');
+    alert.success(isUpdate ? 'Успешно обновлено' : 'Товар добавлен');
+    if (!isUpdate) {
+      setImages([]);
+      setCategory('');
+      setQuantity('');
+      setSex('1');
+      setCurrency('BYN');
+      setPrice('');
+      setDiscription('');
+      setTitle('');
+    }
   }
 
   function deleteImage(i) {
@@ -261,6 +278,7 @@ function WearFrom({ id, isUpdate, wears }) {
           </label>
           <input
             type="file"
+            multiple={true}
             style={{ marginTop: '20px' }}
             id="file"
             className={styles.file}
