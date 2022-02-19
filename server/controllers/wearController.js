@@ -10,7 +10,7 @@ const imagesApiKey = process.env.IMAGES_API_KEY;
 
 router.put('/:id', roleMiddleware(['ADMIN']), async (req, res) => {
   try {
-    const { title, price, currency, category, discription, quantity, images, sex } = req.body;
+    const { title, price, currency, category, discription, quantity, images, sex, sizes } = req.body;
     await Wear.updateOne(
       { _id: ObjectId(req.params.id) },
       {
@@ -22,6 +22,7 @@ router.put('/:id', roleMiddleware(['ADMIN']), async (req, res) => {
         images: JSON.parse(images),
         quantity,
         sex,
+        sizes: JSON.parse(sizes),
       }
     );
     res.status(200).json({

@@ -11,6 +11,7 @@ const schema = new Schema({
   quantity: { type: Number, required: true, default: 0 },
   popularity: { type: Number, required: true, default: 0 },
   sex: { type: Number, required: true, default: 1 },
+  sizes: { type: [String], required: true },
 });
 
 module.exports = model('Wear', schema);

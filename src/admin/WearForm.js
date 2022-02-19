@@ -18,6 +18,7 @@ function WearFrom({ id, isUpdate, wears }) {
   const [category, setCategory] = useState('');
   const [quantity, setQuantity] = useState('');
   const [images, setImages] = useState([]);
+  const [sizes, setSizes] = useState([]);
 
   useEffect(() => {
     if (isUpdate) {
@@ -36,6 +37,7 @@ function WearFrom({ id, isUpdate, wears }) {
           setDiscription(d.discription);
           setTitle(d.title);
           setDisabledSubmit(false);
+          setSizes(d.sizes);
         });
       return;
     }
@@ -110,6 +112,7 @@ function WearFrom({ id, isUpdate, wears }) {
     formData.append(`category`, category);
     formData.append(`currency`, currency);
     formData.append(`sex`, sex);
+    formData.append(`sizes`, JSON.stringify(sizes));
     const url = isUpdate ? `/api/wear/${id}` : '/api/addwear';
     const rawResponse = await fetch(url, {
       method: isUpdate ? 'PUT' : 'POST',
@@ -134,6 +137,7 @@ function WearFrom({ id, isUpdate, wears }) {
       setPrice('');
       setDiscription('');
       setTitle('');
+      setSizes([]);
     }
   }
 
@@ -141,6 +145,15 @@ function WearFrom({ id, isUpdate, wears }) {
     const newArr = [...images];
     newArr.splice(i, 1);
     setImages(newArr);
+  }
+
+  const [addSize, setAddSize] = useState('');
+  function addSizeHandler() {
+    if (!addSize) {
+      return;
+    }
+    setSizes([...sizes, addSize]);
+    setAddSize('');
   }
 
   return (
@@ -235,6 +248,24 @@ function WearFrom({ id, isUpdate, wears }) {
             setQuantity(e.target.value);
           }}
         />
+
+        <label className={styles.label}>Размеры</label>
+        <div className={styles.sizesContainer}>
+          <div style={{ width: '100%' }}>{sizes.join(', ')}</div>
+          <input
+            style={{ width: '70px' }}
+            type="text"
+            className={styles.input}
+            value={addSize}
+            onInput={(e) => {
+              setAddSize(e.target.value);
+            }}
+          />
+          <button type="button" style={{ width: '70px' }} className={styles.button} onClick={addSizeHandler}>
+            +
+          </button>
+        </div>
+
         <div style={{ marginTop: '30px' }}>
           <div>
             <DragDropContext onDragEnd={onDragEndHandler}>

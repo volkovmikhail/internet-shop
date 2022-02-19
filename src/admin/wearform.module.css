@@ -165,3 +165,12 @@
   margin: 0 auto;
   padding: 0 25px;
 }
+
+.sizesContainer {
+  display: flex;
+  align-items: flex-start;
+}
+
+.sizesContainer > * {
+  margin: 1rem;
+}
