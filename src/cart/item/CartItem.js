@@ -3,7 +3,7 @@ import styles from './cartitem.module.css';
 import { useDispatch } from 'react-redux';
 import { deleteFromCart } from '../../actions';
 
-function CartItem({ url, title, price, currency, id, count }) {
+function CartItem({ url, title, price, currency, index, size }) {
   const dispatch = useDispatch();
   function deleteCartItem(itemId) {
     dispatch(deleteFromCart(itemId));
@@ -21,12 +21,12 @@ function CartItem({ url, title, price, currency, id, count }) {
           ></div>
           <div className={styles.cardInfo}>
             <div className={styles.cartText}>
-              <p>{title} - </p>
+              <p>{title} </p>
+              <p>( размер: {size} ) - </p>
               <div className={styles.cartText}>
                 <p className={styles.price}>
                   {price} {currency}
                 </p>
-                <p>x{count}</p>
               </div>
             </div>
           </div>
@@ -34,7 +34,7 @@ function CartItem({ url, title, price, currency, id, count }) {
         <button
           className={styles.deleteButton}
           onClick={() => {
-            deleteCartItem(id);
+            deleteCartItem(index);
           }}
         >
           &#10006;

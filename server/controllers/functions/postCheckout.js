@@ -38,14 +38,10 @@ module.exports = async (req, res) => {
     const session = await mongoose.startSession();
     session.startTransaction();
     for (let j = 0; j < data.length; j++) {
-      htmlBody += `<li>${data[j].title} - цена: ${data[j].price} ${data[j].currency} <b>x${data[j].count}</b></li>`;
-      await Wear.updateOne({ _id: data[j]._id }, { $inc: { quantity: -data[j].count, popularity: 5 } }).session(
-        session
-      );
-      for (let i = 0; i < data[j].count; i++) {
-        sum += data[j].price;
-        wears.push(ObjectId(data[j]._id));
-      }
+      htmlBody += `<li>${data[j].title} (размер: ${data[j].size}) - цена: ${data[j].price} ${data[j].currency}</li>`;
+      await Wear.updateOne({ _id: data[j]._id }, { $inc: { quantity: -1, popularity: 5 } }).session(session);
+      sum += data[j].price;
+      wears.push({ wearId: ObjectId(data[j]._id), size: data[j].size });
     }
     htmlBody += '</ol><hr/>';
     htmlBody += `<b><i>Итог = ${sum} ${data[0].currency}</b></i>`;

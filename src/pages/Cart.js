@@ -22,7 +22,7 @@ function Cart() {
     }
     let total = 0;
     cart.forEach((i) => {
-      total += i.count * i.price;
+      total += i.price;
     });
     return total;
   }

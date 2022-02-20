@@ -44,21 +44,7 @@ function Orders() {
                     {order.user[0].email}
                   </td>
                   <td>{new Date(order.date).toLocaleString()}</td>
-                  <td>
-                    <ol>
-                      {order.wears.map((w, index) => {
-                        total += w.price;
-                        return (
-                          <li className={styles.item} key={index}>
-                            {w._id} <br />
-                            {w.title} - {w.price} {w.currency}
-                            <br />
-                          </li>
-                        );
-                      })}
-                    </ol>
-                    Sum = {total}
-                  </td>
+                  <td></td>
                 </tr>
               );
             })}

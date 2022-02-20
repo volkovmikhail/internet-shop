@@ -7,8 +7,8 @@ function Catalog({ wears, sex }) {
   const [state, setState] = useState(wears);
   const [activeCat, setActiveCat] = useState('all');
   useEffect(() => {
-    setState(sort(wears, 'popularity', 0));
     setActiveCat('all');
+    setState([...sort(wears, 'popularity', 0)]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sex]);
 
@@ -123,6 +123,7 @@ function Catalog({ wears, sex }) {
                 title={wear.title}
                 price={wear.price}
                 currency={wear.currency}
+                sizes={wear.sizes}
               />
             );
           })}

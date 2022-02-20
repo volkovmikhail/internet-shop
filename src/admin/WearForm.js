@@ -42,6 +42,7 @@ function WearFrom({ id, isUpdate, wears }) {
       return;
     }
     setDisabledSubmit(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   function categoryHandler(value, isSelect) {
@@ -93,6 +94,7 @@ function WearFrom({ id, isUpdate, wears }) {
       title.trim().length < 1 ||
       discription.trim().length < 1 ||
       images.length === 0 ||
+      sizes.length === 0 ||
       category.trim().length < 1 ||
       isNaN(parseFloat(price)) ||
       isNaN(parseFloat(quantity))
@@ -154,6 +156,12 @@ function WearFrom({ id, isUpdate, wears }) {
     }
     setSizes([...sizes, addSize]);
     setAddSize('');
+  }
+
+  function delSize(id) {
+    const newArr = [...sizes];
+    newArr.splice(id, 1);
+    setSizes(newArr);
   }
 
   return (
@@ -251,7 +259,16 @@ function WearFrom({ id, isUpdate, wears }) {
 
         <label className={styles.label}>Размеры</label>
         <div className={styles.sizesContainer}>
-          <div style={{ width: '100%' }}>{sizes.join(', ')}</div>
+          <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap' }}>
+            {sizes.map((s, i) => (
+              <div key={i} className={styles.size}>
+                <span style={{ width: '100%', margin: '5px' }}>{s}</span>
+                <button className={styles.delButton} type="button" onClick={() => delSize(i)}>
+                  x
+                </button>
+              </div>
+            ))}
+          </div>
           <input
             style={{ width: '70px' }}
             type="text"
@@ -287,6 +304,7 @@ function WearFrom({ id, isUpdate, wears }) {
                             }}
                           >
                             <button
+                              className={styles.delButton}
                               type="button"
                               onClick={() => {
                                 deleteImage(index);

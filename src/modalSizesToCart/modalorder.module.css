@@ -1,0 +1,45 @@
+.size {
+  border: 1px solid rgb(203, 213, 224);
+  border-radius: 3px;
+  min-width: 50px;
+  min-height: 50px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  vertical-align: middle;
+  margin: 5px;
+  cursor: pointer;
+  -webkit-transition: all 0.7s ease-out;
+  transition: all 0.7s ease-out;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7s;
+}
+
+.active {
+  color: #fff;
+  border: 1px solid #000;
+  background-color: #000;
+}
+
+.size:hover {
+  background-color: rgb(203, 213, 224);
+}
+
+.active:hover {
+  color: #fff;
+  border: 1px solid #000;
+  background-color: #000;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}

@@ -141,6 +141,15 @@
   background-color: #ffffff;
 }
 
+.inCart{
+  animation: ani 1s forwards;
+  margin: 10px;
+  -webkit-transition: all 0.7s ease-out;
+  transition: all 0.7s ease-out;
+  -webkit-transition: all 0.7s;
+  transition: all 0.7s;
+}
+
 .orderButton:hover {
   color: #000;
   background-color: #ffffff;

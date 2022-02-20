@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './itemcontent.module.css';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../actions';
+import ModalToCart from '../modalSizesToCart/ModalToCart';
 
 function ItemContent({ wear }) {
-  const dispath = useDispatch();
+  const [open, setOpen] = useState(false);
 
-  function addItemToCart(itemId) {
-    dispath(addToCart(itemId));
+  function addItemToCart(itemId, size) {
+    setOpen(true);
   }
 
   return (
@@ -27,6 +26,16 @@ function ItemContent({ wear }) {
           <div className={styles.discription}>
             <p>{wear.discription}</p>
           </div>
+          <div className={styles.sizes}>
+            <div>Размеры:</div>
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+              {wear.sizes.map((s, i) => (
+                <div className={styles.sizesItem} key={i}>
+                  {s}
+                </div>
+              ))}
+            </div>
+          </div>
           <div className={styles.category}>
             <p>Категория: {wear.category}</p>
           </div>
@@ -38,18 +47,23 @@ function ItemContent({ wear }) {
           <button
             className={styles.orderButton + ' ' + styles.category}
             onClick={() => {
-              addItemToCart(wear._id);
+              addItemToCart(wear._id, 'SIZE');
             }}
           >
             Добавить в корзину
           </button>
-          <div >
-            <p>
-              Количество товара на складе: {wear.quantity}
-            </p>
+          <div>
+            <p>Количество товара на складе: {wear.quantity}</p>
           </div>
         </div>
       </div>
+      <ModalToCart
+        open={open}
+        close={() => {
+          setOpen(false);
+        }}
+        wear={wear}
+      />
     </main>
   );
 }

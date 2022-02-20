@@ -5,12 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
+import 'react-responsive-modal/styles.css';
 
 const alertOptions = {
   position: positions.TOP_CENTER,
   timeout: 3000,
   offset: '30px',
   transition: transitions.FADE,
+  containerStyle: { zIndex: '1002' },
 };
 
 ReactDOM.render(

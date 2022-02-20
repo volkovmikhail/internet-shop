@@ -19,11 +19,12 @@ export function setWears(wears) {
   };
 }
 
-export function addToCart(id) {
+export function addToCart(id, size) {
   return (dispatch) => {
+    fetch(`/api/wear/popularity?id=${id}&popularity=${2}`, { method: 'PATCH' });
     dispatch({
       type: ADD_TO_CART,
-      payload: id,
+      payload: { id, size },
     });
   };
 }

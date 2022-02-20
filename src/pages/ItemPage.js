@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import Header from '../header/Header';
 import Footer from '../footer/Footer';
 import ItemContent from '../itemContent/ItemContent';
+import { useDispatch } from 'react-redux';
+import { fetchWears } from '../actions';
 
 function ItemPage() {
   const [state, setState] = useState({});
   const [status, setStatus] = useState(0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setItemData();
+    dispatch(fetchWears());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

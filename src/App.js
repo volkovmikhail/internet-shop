@@ -1,4 +1,4 @@
-import React from 'react';
+import { React } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import useRoutes from './routers';
 import reducer from './reducer';

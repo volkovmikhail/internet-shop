@@ -9,8 +9,7 @@ function Menu({ active }) {
   const { token } = useContext(AuthContext);
 
   const getCartItemsCount = (cart) => {
-    let sum = 0;
-    cart.forEach((item) => (sum += item.count));
+    let sum = cart.length;
     return sum;
   };
 

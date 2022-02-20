@@ -11,6 +11,22 @@ main {
   justify-content: space-between;
 }
 
+.sizes {
+  margin: 3px;
+  border: 1px solid rgb(203, 213, 224);
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 2rem;
+}
+.sizes > div {
+  margin: 5px;
+}
+
+.sizesItem{
+  margin: 6px;
+  border-bottom: #000 1px solid;
+}
+
 .imagesContainer {
   width: 60%;
   display: grid;
@@ -105,10 +121,10 @@ main {
   margin-bottom: 1rem;
 }
 
-.discription{
+.discription {
   margin: 2rem 0 2rem 0;
 }
 
-.category{
+.category {
   margin-bottom: 1rem;
 }
