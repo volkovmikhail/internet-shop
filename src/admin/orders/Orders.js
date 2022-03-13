@@ -1,14 +1,20 @@
 import React, { useState, useContext, useEffect } from 'react';
-import styles from './orders.module.css';
 import { AuthContext } from '../../AuthContext';
+import OrdersList from '../../orders/OrdersList';
 
 function Orders() {
   const [state, setState] = useState(null);
   const { token } = useContext(AuthContext);
+  const [orders, setOrders] = useState([]);
+
+  const [date, setdate] = useState('');
+  const [code, setCode] = useState('');
+  const [status, setStatus] = useState('');
+
   useEffect(() => {
     async function fetchData() {
       const data = await (
-        await fetch('/api/orders', {
+        await fetch('/api/order/all', {
           method: 'GET',
           headers: {
             Authorization: `bearer ${token}`,
@@ -16,43 +22,71 @@ function Orders() {
         })
       ).json();
       setState(data);
+      setOrders(data);
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  function searchHandler(code, valueMonth, valueStatus) {
+    console.log(valueMonth);
+    setdate(valueMonth);
+    setCode(code);
+    setStatus(valueStatus);
+    setOrders(
+      state
+        .filter((o) => {
+          if (!valueMonth) {
+            return true;
+          }
+          const date = new Date(o.orderDate);
+          const month = date.getMonth() + 1;
+          const year = date.getFullYear();
+          const eventDate = valueMonth.split('-');
+          console.log(month, year, eventDate);
+          return year === Number(eventDate[0]) && month === Number(eventDate[1]);
+        })
+        .filter((o) => o._id.substring(o._id.length - 8).includes(code.toLowerCase().trim()))
+        .filter((o) => {
+          if (!valueStatus) {
+            return true;
+          }
+          return o.status === valueStatus;
+        })
+    );
+  }
+
   return (
     <div className="container">
-      {state ? (
-        <table>
-          <thead>
-            <tr>
-              <td>User</td>
-              <td>Date</td>
-              <td>Purchases</td>
-            </tr>
-          </thead>
-          <tbody>
-            {state.map((order, index) => {
-              let total = 0;
-              return (
-                <tr key={index}>
-                  <td>
-                    {order.user[0]._id}
-                    <br />
-                    {order.user[0].name + ' ' + order.user[0].lastname}
-                    <br />
-                    {order.user[0].email}
-                  </td>
-                  <td>{new Date(order.date).toLocaleString()}</td>
-                  <td></td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      ) : (
-        <div className="loader"></div>
-      )}
+      <div style={{ marginBottom: '25px', display: 'flex' }}>
+        <input
+          type="text"
+          className="input"
+          placeholder="Поиск по коду"
+          value={code}
+          onInput={(e) => searchHandler(e.target.value, date, status)}
+        />
+        <div style={{ width: '25px' }}></div>
+        <input
+          className="input"
+          type="month"
+          value={date}
+          onInput={(e) => searchHandler(code, e.target.value, status)}
+        />
+        <div style={{ width: '25px' }}></div>
+        <select
+          style={{ maxWidth: '320px' }}
+          onChange={(e) => searchHandler(code, date, e.target.value)}
+          className="input"
+          value={status}
+        >
+          <option value="">Все статусы</option>
+          <option value="В обработке">В обработке</option>
+          <option value="В пути">В пути</option>
+          <option value="Доставлен">Доставлен</option>
+        </select>
+      </div>
+      {state ? <OrdersList orders={orders} /> : <div className="loader"></div>}
     </div>
   );
 }

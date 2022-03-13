@@ -7,8 +7,9 @@ function Footer() {
       <div className="container">
         <div className={styles.contacts}>
           <div>
-            <p className={styles.footerText}>Контактный телефон: +375445553344</p>
-            <p className={styles.footerText}>Адрес: ул. Пушкина 184</p>
+            <a href="https://volkovmikhail.github.io/links.html">
+              <p className={styles.footerText}>Автор проекта: Волков Михаил Юрьевич 39ТП</p>
+            </a>
             <a href="mailto:volkov.electronics@gmail.com">
               <p className={styles.footerText}>Электронная почта: volkov.electronics@gmail.com</p>
             </a>

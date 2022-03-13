@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard';
 import LoginPage from './pages/LoginPage';
 import Profile from './pages/Profile';
 import RegistrationPage from './pages/RegistrationPage';
+import Order from './pages/Order';
 
 function useRoutes(role) {
   switch (role) {
@@ -34,6 +35,9 @@ function useRoutes(role) {
           </Route>
           <Route path="/registration" exact>
             <RegistrationPage />
+          </Route>
+          <Route path="/order/:id">
+            <Order/>
           </Route>
           <Redirect to="/catalog" />
         </Switch>
@@ -65,6 +69,9 @@ function useRoutes(role) {
           <Route path="/registration" exact>
             <RegistrationPage />
           </Route>
+          <Route path="/order/:id">
+            <Order/>
+          </Route>
           <Redirect to="/dashboard" />
         </Switch>
       );
@@ -91,6 +98,9 @@ function useRoutes(role) {
           </Route>
           <Route path="/registration" exact>
             <RegistrationPage />
+          </Route>
+          <Route path="/order/:id">
+            <Order/>
           </Route>
           <Redirect to="/catalog" />
         </Switch>

@@ -53,7 +53,12 @@ function ItemContent({ wear }) {
             Добавить в корзину
           </button>
           <div>
-            <p>Количество товара на складе: {wear.quantity}</p>
+            <p>Артикул: {wear._id.substring(wear._id.length - 8)}</p>
+          </div>
+          <div>
+            <p>
+              Количество товара на складе: <b>{wear.quantity}</b>
+            </p>
           </div>
         </div>
       </div>

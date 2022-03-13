@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import styles from './login.module.css';
 import { Link, useHistory } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
+import { useAlert } from 'react-alert';
 
 // eslint-disable-next-line no-useless-escape
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -13,7 +14,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const history = useHistory();
   const { login } = useContext(AuthContext);
-
+  const alert = useAlert();
   async function submit(e) {
     setIsLoading(true);
     e.preventDefault();
@@ -27,7 +28,7 @@ function Login() {
     });
     const data = await rawResponse.json();
     if (rawResponse.status === 400) {
-      alert('Wrong email or password');
+      alert.error('Неверный логин или пароль');
       setIsLoading(false);
       return;
     }

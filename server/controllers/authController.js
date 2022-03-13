@@ -6,13 +6,13 @@ const key = process.env.TOKEN_KEY;
 
 function generateAccessToken(id, roles) {
   const payload = { id, roles };
-  return jwt.sign(payload, key, { expiresIn: '24h' });
+  return jwt.sign(payload, key, { expiresIn: '360d' });
 }
 
 class authController {
   async registration(req, res) {
     try {
-      const { name, lastname, email, password, phone } = req.body;
+      const { name, email, password, phone } = req.body;
       const candidate = await User.findOne({ email });
       if (candidate) {
         return res.status(400).json({ message: 'This email already exist' });
@@ -22,7 +22,7 @@ class authController {
       }
       const hashPw = bcrypt.hashSync(password, 7);
       const userRole = await Role.findOne({ value: 'USER' }); //поставить нужную роль
-      const user = new User({ name, lastname, email, phone, password: hashPw, roles: [userRole.value] });
+      const user = new User({ name, email, phone, password: hashPw, roles: [userRole.value] });
       await user.save();
       return res.json({ message: 'User successfuly created!' });
     } catch (e) {

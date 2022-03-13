@@ -1,7 +1,7 @@
 import React from 'react';
 import CartItem from './item/CartItem';
 
-function CartContent({ cart }) {
+function CartContent({ cart, isDisableDelete }) {
   return (
     <div className="container" style={{ display: 'flex', flexDirection: 'column' }}>
       {cart.map((wear, index) => {
@@ -15,6 +15,7 @@ function CartContent({ cart }) {
             price={wear.price}
             currency={wear.currency}
             size={wear.size}
+            isDisableDelete={isDisableDelete}
           />
         );
       })}

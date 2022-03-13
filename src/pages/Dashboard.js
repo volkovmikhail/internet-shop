@@ -25,16 +25,16 @@ function Dashboard() {
   return (
     <div>
       <Header active="" />
-      <h1 className="title">Dashboard</h1>
+      <h1 className="title">Панель администратора</h1>
       <div className="container" style={{ display: 'flex', columnGap: '20px', marginBottom: '50px' }}>
         <button className="logoutBtn" onClick={() => setState('add')}>
-          add wear
+          Добавить товар
         </button>
         <button className="logoutBtn" onClick={() => setState('wears')}>
-          manage wears
+          Управление товарами
         </button>
         <button className="logoutBtn" onClick={() => setState('orders')}>
-          orders
+          Заказы
         </button>
       </div>
       {switchComponent(state)}

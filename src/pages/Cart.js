@@ -6,6 +6,7 @@ import CartContent from '../cart/CartContent';
 import { useSelector, useDispatch } from 'react-redux';
 import { AuthContext } from '../AuthContext';
 import { clearCart } from '../actions';
+import { useAlert } from 'react-alert';
 
 function Cart() {
   const store = useSelector((state) => state);
@@ -16,6 +17,7 @@ function Cart() {
   const { token, logout } = useContext(AuthContext);
   const [isLodaing, setLoading] = useState(true);
   const history = useHistory();
+  const alert = useAlert();
   function total(cart) {
     if (!cart) {
       return 0;
@@ -42,12 +44,12 @@ function Cart() {
       body: JSON.stringify({ cart: store.cart, address, date }),
     });
     if (raw.status === 200) {
-      alert('The order is placed, the manager will contact you for confirm');
+      alert.success('Заказ оформлен, с вами свяжется менеджер');
     } else if (raw.status === 400) {
       logout();
       history.push('/login');
     } else {
-      alert('Somthing wrong, try again');
+      alert.error('Что то не так, попробуйте снова');
       setLoading(false);
       return;
     }
@@ -123,7 +125,7 @@ function Cart() {
                   <label htmlFor="order_datetime">Заказать на дату</label>
                   <input
                     className="input"
-                    type="datetime-local"
+                    type="date"
                     name="order_datetime"
                     id="order_datetime"
                     style={dateStyle}

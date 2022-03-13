@@ -4,9 +4,10 @@ const getWearById = require('../controllers/functions/getWearById');
 const getProfile = require('../controllers/functions/getProfile');
 const postCheckout = require('../controllers/functions/postCheckout');
 const postAddWear = require('../controllers/functions/postAddWear');
-const getOrders = require('../controllers/functions/getOrders');
 const deleteWear = require('../controllers/functions/deleteWear');
+
 const wearController = require('../controllers/wearController');
+const orderController = require('../controllers/orderController');
 //middleтвари
 const authMiddleware = require('../middlewares/authMiddleware');
 const roleMiddleware = require('../middlewares/roleMiddleware');
@@ -24,11 +25,11 @@ router.post('/checkout', authMiddleware, postCheckout);
 
 router.post('/addwear', roleMiddleware(['ADMIN']), postAddWear);
 
-router.get('/orders', roleMiddleware(['ADMIN']), getOrders);
-
 router.delete('/wear/delete/:id', roleMiddleware(['ADMIN']), deleteWear);
 
 //так лучше делать, выделять роутер для отдельных сущностей
 router.use('/wear', wearController);
+
+router.use('/order', orderController);
 
 module.exports = router;

@@ -13,10 +13,18 @@ module.exports = async (req, res) => {
     const data = req.body.cart;
     const address = req.body.address;
     const date = req.body.date;
+    let port, secure;
+    if (process.env.NODE_ENV === 'development') {
+      port = 587;
+      secure = false;
+    } else {
+      port = 465;
+      secure = true;
+    }
     let transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
+      port: port,
+      secure: secure,
       auth: {
         user: process.env.ADMIN_EMAIL,
         pass: process.env.ADMIN_EMAIL_PASS,
@@ -24,7 +32,6 @@ module.exports = async (req, res) => {
     });
     //making html
     let htmlBody = '';
-    htmlBody += `<b>Пользователь: ${user.name} ${user.lastname}</b><br/>`;
     htmlBody += `<b>Номер телефона: ${user.phone || '-'}</b><br/>`;
     htmlBody += `<b>Эл. почта: ${user.email}</b><br/>`;
     htmlBody += `<b>Заказ на дату: ${new Date(date).toLocaleDateString('en-GB')} ${new Date(date).toLocaleTimeString(
@@ -55,6 +62,10 @@ module.exports = async (req, res) => {
     await order.save({ session: session });
     await session.commitTransaction();
     session.endSession();
+    const createdOrder = await Order.findOne(order);
+    htmlBody += `<br/><h2>Код заказа: ${createdOrder._id
+      .toString()
+      .substring(createdOrder._id.toString().length - 8)}</h2>`;
     //send
     pdf.create(htmlBody).toBuffer(async function (err, buffer) {
       if (err) {
@@ -68,7 +79,7 @@ module.exports = async (req, res) => {
         html: htmlBody,
         attachments: [
           {
-            filename: `чек_${user.name}_${user.lastname}.pdf`,
+            filename: `чек_${user.name}.pdf`,
             content: buffer,
             contentType: 'application/pdf',
           },
@@ -82,7 +93,7 @@ module.exports = async (req, res) => {
         html: htmlBody,
         attachments: [
           {
-            filename: `чек_${user.name}_${user.lastname}.pdf`,
+            filename: `чек_${user.name}.pdf`,
             content: buffer,
             contentType: 'application/pdf',
           },

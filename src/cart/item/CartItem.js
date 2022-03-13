@@ -2,8 +2,9 @@ import { React } from 'react';
 import styles from './cartitem.module.css';
 import { useDispatch } from 'react-redux';
 import { deleteFromCart } from '../../actions';
+import { Link } from 'react-router-dom';
 
-function CartItem({ url, title, price, currency, index, size }) {
+function CartItem({ url, title, price, currency, index, size, id, isDisableDelete }) {
   const dispatch = useDispatch();
   function deleteCartItem(itemId) {
     dispatch(deleteFromCart(itemId));
@@ -12,33 +13,39 @@ function CartItem({ url, title, price, currency, index, size }) {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.card}>
-        <div className={styles.mainInfo}>
-          <div
-            className={styles.cardImg}
-            style={{
-              backgroundImage: `url('${url}')`,
-            }}
-          ></div>
-          <div className={styles.cardInfo}>
-            <div className={styles.cartText}>
-              <p>{title} </p>
-              <p>( размер: {size} ) - </p>
+        <Link to={`/item/${id}`}>
+          <div className={styles.mainInfo}>
+            <div
+              className={styles.cardImg}
+              style={{
+                backgroundImage: `url('${url}')`,
+              }}
+            ></div>
+            <div className={styles.cardInfo}>
               <div className={styles.cartText}>
-                <p className={styles.price}>
-                  {price} {currency}
-                </p>
+                <p>{title} </p>
+                <p>( размер: {size} ) - </p>
+                <div className={styles.cartText}>
+                  <p className={styles.price}>
+                    {price} {currency}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <button
-          className={styles.deleteButton}
-          onClick={() => {
-            deleteCartItem(index);
-          }}
-        >
-          &#10006;
-        </button>
+        </Link>
+        {isDisableDelete ? (
+          ''
+        ) : (
+          <button
+            className={styles.deleteButton}
+            onClick={() => {
+              deleteCartItem(index);
+            }}
+          >
+            &#10006;
+          </button>
+        )}
       </div>
       <hr />
     </div>

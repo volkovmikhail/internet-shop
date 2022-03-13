@@ -11,6 +11,7 @@ const Order = new Schema({
   onDate: { type: Date, default: null },
   address: { type: String, default: null },
   orderDate: { type: Date },
+  status: { type: String, default: 'В обработке' },
 });
 
 module.exports = model('Order', Order);
