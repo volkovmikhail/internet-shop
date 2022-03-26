@@ -40,7 +40,7 @@ function Shop() {
         </div>
       </div>
       {store.catalog?.length ? (
-        <Catalog wears={store.catalog.filter((w) => w.sex === sex)} sex={sex} />
+        <Catalog wears={store.catalog.filter((w) => w.sex === sex || w.sex === 2)} sex={sex} />
       ) : (
         <div className="loadingContainer">
           <div className="loader"></div>

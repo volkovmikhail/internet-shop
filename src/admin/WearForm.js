@@ -223,6 +223,7 @@ function WearFrom({ id, isUpdate, wears }) {
         >
           <option value="1">Мужское</option>
           <option value="0">Женское</option>
+          <option value="2">Унисекс</option>
         </select>
 
         <label className={styles.label}>Категория</label>
