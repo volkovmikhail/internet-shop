@@ -14,7 +14,6 @@ const roleMiddleware = require('../middlewares/roleMiddleware');
 
 const router = Router();
 
-//functions old я был тупой и совершал ошибки
 router.get('/wears', getAllWears);
 
 router.get('/wear/:id', getWearById);
