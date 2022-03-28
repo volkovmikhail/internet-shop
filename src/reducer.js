@@ -14,7 +14,7 @@ export default function reducer(store = initState, action) {
         catalog: [...action.payload],
       };
     case ADD_TO_CART:
-      let newItem = store.catalog.filter((i) => i._id === action.payload.id);
+      let newItem = JSON.parse(JSON.stringify(store.catalog.filter((i) => i._id === action.payload.id)));
       newItem[0].size = action.payload.size;
       const cart = store.cart;
       if (cart) {

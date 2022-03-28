@@ -29,6 +29,7 @@ const ModalToCart = ({ open, close, wear }) => {
     }
     dispath(addToCart(id, active));
     alert.success('Товар добавлен в корзину!');
+    setActive('');
     close();
   }
 
