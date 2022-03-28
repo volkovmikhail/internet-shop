@@ -34,7 +34,7 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-.imagesContainer > div {
+.imagesContainer div {
   padding-bottom: 100%;
   background-repeat: no-repeat;
   background-position: center;

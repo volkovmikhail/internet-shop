@@ -14,7 +14,11 @@ function ItemContent({ wear }) {
       <div className={styles.container}>
         <div className={styles.imagesContainer}>
           {wear?.images !== undefined ? (
-            wear.images.map((i, index) => <div key={index} style={{ backgroundImage: `url('${i}')` }}></div>)
+            wear.images.map((i, index) => (
+              <a href={i}>
+                <div key={index} style={{ backgroundImage: `url('${i}')` }}></div>
+              </a>
+            ))
           ) : (
             <h1>Загрузка...</h1>
           )}

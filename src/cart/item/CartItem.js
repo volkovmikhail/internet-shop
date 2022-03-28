@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { deleteFromCart } from '../../actions';
 import { Link } from 'react-router-dom';
 
-function CartItem({ url, title, price, currency, index, size, id, isDisableDelete }) {
+function CartItem({ url, title, price, currency, index, size, id, count, isDisableDelete }) {
   const dispatch = useDispatch();
   function deleteCartItem(itemId) {
     dispatch(deleteFromCart(itemId));
@@ -29,6 +29,7 @@ function CartItem({ url, title, price, currency, index, size, id, isDisableDelet
                   <p className={styles.price}>
                     {price} {currency}
                   </p>
+                  <p>{count ? `x ${count}` : ''}</p>
                 </div>
               </div>
             </div>

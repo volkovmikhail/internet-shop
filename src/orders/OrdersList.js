@@ -6,9 +6,11 @@ export default function OrdersList({ orders, minimal }) {
   return (
     <div className={styles.orders}>
       {orders.map((order, i) => (
-        <Link to={`/order/${order._id}`}>
-          <div className={styles.order} key={i}>
-            <h3>Код заказа: {order._id.substring(order._id.length - 8)} - {order.status}</h3>
+        <Link to={`/order/${order._id}`} key={i}>
+          <div className={styles.order}>
+            <h3>
+              Код заказа: {order._id.substring(order._id.length - 8)} - {order.status}
+            </h3>
             <div className={styles.orderInfo}>
               {minimal ? (
                 ''

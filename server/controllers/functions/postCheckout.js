@@ -100,7 +100,7 @@ module.exports = async (req, res) => {
         ],
       });
     });
-    res.status(200).json({ message: 'Order created' });
+    res.status(200).json({ code: createdOrder._id.toString().substring(createdOrder._id.toString().length - 8) });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: 'Somthing wrong' });

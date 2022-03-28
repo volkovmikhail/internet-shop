@@ -24,9 +24,9 @@ export default function Order() {
             }
           }
         });
-        console.log(res);
         setstate(res);
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [relode]);
 
   function setStatusHandler(e) {
@@ -76,7 +76,7 @@ export default function Order() {
               Количество товаров: <b>{state.order.data.length}</b>
             </p>
             <p>
-              Сумма: <b>{state.sum}</b>
+              Сумма: <b>{state.sum} BYN</b>
             </p>
             <p>
               Статус: <b>{state.order.status}</b>

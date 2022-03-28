@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AuthContext } from '../AuthContext';
 import { clearCart } from '../actions';
 import { useAlert } from 'react-alert';
+import Modal from 'react-responsive-modal';
 
 function Cart() {
   const store = useSelector((state) => state);
@@ -18,6 +19,8 @@ function Cart() {
   const [isLodaing, setLoading] = useState(true);
   const history = useHistory();
   const alert = useAlert();
+  const [openModal, setOpenModal] = useState(false);
+  const [code, setCode] = useState('');
   function total(cart) {
     if (!cart) {
       return 0;
@@ -44,7 +47,9 @@ function Cart() {
       body: JSON.stringify({ cart: store.cart, address, date }),
     });
     if (raw.status === 200) {
-      alert.success('Заказ оформлен, с вами свяжется менеджер');
+      const json = await raw.json();
+      setCode(json.code);
+      setOpenModal(true);
     } else if (raw.status === 400) {
       logout();
       history.push('/login');
@@ -55,7 +60,6 @@ function Cart() {
     }
     setLoading(false);
     dispatch(clearCart());
-    history.push('/catalog');
   }
 
   function onDateHandler(e) {
@@ -162,6 +166,23 @@ function Cart() {
           )}
         </div>
       ) : null}
+      <Modal
+        open={openModal}
+        onClose={() => {
+          setOpenModal(false);
+          history.push('/catalog');
+        }}
+        center
+      >
+        <h2>Заказ оформлен!</h2>
+        <h2>Код вашего заказа: {code}</h2>
+        <br />
+        <h4>Вам отправлено письмо с чеком на вашу эл. почту</h4>
+        <br />
+        <h4>подробности заказа можно посмотреть в профиле</h4>
+        <br />
+        <h3 style={{ color: 'salmon' }}>скоро с вами свяжется менеджер для уточнения деталей заказа</h3>
+      </Modal>
       <Footer />
     </div>
   );

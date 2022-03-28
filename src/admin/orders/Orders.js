@@ -7,7 +7,7 @@ function Orders() {
   const { token } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
 
-  const [date, setdate] = useState('');
+  const [date, setdate] = useState(`${new Date().getFullYear()}-${(new Date().getMonth() + 1).toString().padStart(2, '0')}`);
   const [code, setCode] = useState('');
   const [status, setStatus] = useState('');
 
@@ -29,7 +29,6 @@ function Orders() {
   }, []);
 
   function searchHandler(code, valueMonth, valueStatus) {
-    console.log(valueMonth);
     setdate(valueMonth);
     setCode(code);
     setStatus(valueStatus);
@@ -43,7 +42,6 @@ function Orders() {
           const month = date.getMonth() + 1;
           const year = date.getFullYear();
           const eventDate = valueMonth.split('-');
-          console.log(month, year, eventDate);
           return year === Number(eventDate[0]) && month === Number(eventDate[1]);
         })
         .filter((o) => o._id.substring(o._id.length - 8).includes(code.toLowerCase().trim()))
