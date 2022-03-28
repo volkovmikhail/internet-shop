@@ -104,7 +104,7 @@ function Profile() {
           }}
           center
         >
-          <h2 style={{ margin: '30px' }}>Редактировать данные</h2>
+          <h3 style={{ marginTop: '40px' }}>Редактировать данные</h3>
           <form onSubmit={submitEdit}>
             <br />
             <p>
